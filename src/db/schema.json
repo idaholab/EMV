@@ -1,0 +1,169 @@
+{
+    "schema": [
+        {
+            "name": "Configuration",
+            "superclass": "V",
+            "properties": [
+                { "name": "name", "type": "String", "max": 255, "mandatory": true, "notNull": true },
+                { "name": "description", "type": "String", "max": 510, "mandatory": true, "notNull": true }
+            ]
+        },
+        {
+            "name": "User",
+            "superclass": "V",
+            "properties": [
+                { "name": "name", "type": "String", "max": 25, "mandatory": true, "notNull": true },
+                { "name": "password", "type": "String", "mandatory": true, "notNull": false },
+                { "name": "role", "type": "String", "max": 25, "mandatory": true, "notNull": true },
+                { "name": "cis_list_in_progress", "type": "LinkList", "mandatory": false },
+                { "name": "cis_list_approved", "type": "LinkList", "mandatory": false }
+            ]
+        },
+        {
+            "name": "CIS",
+            "superclass": "V",
+            "properties": [
+                { "name": "name", "type": "String", "mandatory": true, "notNull": true },
+                { "name": "description", "type": "String", "mandatory": true, "notNull": false },
+                { "name": "owner", "type": "Link", "linkedClass": "User", "mandatory": true, "notNull": true },
+                { "name": "jsonRep", "type": "String" },
+                { "name": "ticket", "type": "String" },
+                { "name": "ticketMemo", "type": "String" },
+                { "name": "status", "type": "String", "mandatory": true, "notNull": true}
+            ]
+        },
+        {
+            "name": "Category",
+            "superclass": "V",
+            "properties": [
+                { "name": "name", "type": "String", "mandatory": true, "notNull": true },
+                { "name": "total_score", "type": "Decimal", "mandatory": true, "notNull": false },
+                { "name": "memo", "type": "String", "mandatory": false, "notNull": false }
+            ]
+        },
+        {
+            "name": "Characteristic",
+            "superclass": "V",
+            "properties": [
+                { "name": "name", "type": "String", "mandatory": true, "notNull": true },
+                { "name": "total_score", "type": "Decimal", "mandatory": true, "notNull": false },
+                { "name": "weight", "type": "Decimal", "mandatory": true, "notNull": false }
+            ]
+        },
+        {
+            "name": "Attribute",
+            "superclass": "V",
+            "properties": [
+                { "name": "name", "type": "String", "mandatory": true, "notNull": true },
+                { "name": "score", "type": "Decimal", "mandatory": true, "notNull": false },
+                { "name": "user_weight", "type": "Decimal", "mandatory": true, "notNull": true },
+                { "name": "weighted_score", "type": "Decimal", "mandatory": true, "notNull": false }
+            ]
+        },
+        {
+            "name": "Score",
+            "superclass": "V",
+            "properties": [
+                { "name": "description", "type": "String", "mandatory": true, "notNull": true },
+                { "name": "score", "type": "Decimal", "mandatory": true, "notNull": true },
+                { "name": "chosen", "type": "Boolean", "mandatory": true, "notNull": true }
+            ]
+        },
+        {
+            "name": "category_of",
+            "superclass": "E",
+            "properties": [
+                { "name": "in", "type": "Link", "linkedClass": "CIS" },
+                { "name": "out", "type": "Link", "linkedClass": "Category" }
+            ]
+        },
+        {
+            "name": "characteristic_of",
+            "superclass": "E",
+            "properties": [
+                { "name": "in", "type": "Link", "linkedClass": "Category" },
+                { "name": "out", "type": "Link", "linkedClass": "Characteristic" }
+            ]
+        },
+        {
+            "name": "attribute_of",
+            "superclass": "E",
+            "properties": [
+                { "name": "in", "type": "Link", "linkedClass": "Characteristic" },
+                { "name": "out", "type": "Link", "linkedClass": "Attribute" }
+            ]
+        },
+        {
+            "name": "score_guidance_of",
+            "superclass": "E",
+            "properties": [
+                { "name": "in", "type": "Link", "linkedClass": "Attribute" },
+                { "name": "out", "type": "Link", "linkedClass": "Score" }
+            ]
+        },
+        {
+            "name": "revision_of",
+            "superclass": "E",
+            "properties": [
+                { "name": "in", "type": "Link", "linkedClass": "CIS" },
+                { "name": "out", "type": "Link", "linkedClass": "CIS" },
+                { "name": "changes", "type": "string", "mandatory": true }
+            ]
+        },
+        {
+            "name": "belongs_to",
+            "superclass": "E",
+            "properties": [
+                { "name": "in", "type": "Link", "linkedClass": "Configuration" },
+                { "name": "out", "type": "Link", "linkedClass": "CIS" }
+            ]
+        },
+        {
+            "name": "core",
+            "superclass": "V",
+            "properties": [
+                { "name": "id_", "type": "String", "mandatory": true, "notNull": true, "collate": "default" },
+                { "name": "type", "type": "String", "mandatory": true, "notNull": true, "collate": "default" },
+                { "name": "created", "type": "DateTime", "mandatory": true, "notNull": true, "collate": "default" },
+                { "name": "modified", "type": "DateTime", "mandatory": true, "notNull": true, "collate": "default" },
+                { "name": "created_by_ref", "type": "String", "collate": "default" },
+                { "name": "object_marking_refs", "type": "EmbeddedList", "collate": "default" },
+                { "name": "labels", "type": "EmbeddedList", "collate": "default" },
+                { "name": "revoked", "type": "Boolean", "mandatory": true, "notNull": true, "collate": "default", "default": "False" },
+                { "name": "external_references", "type": "EmbeddedList", "collate": "default" },
+                { "name": "granular_markings", "type": "EmbeddedList", "collate": "default" }
+            ]
+        },
+        {
+            "name": "courseOfAction",
+            "superclass": "core",
+            "properties": [
+                { "name": "description", "type": "String", "collate": "default" },
+                { "name": "name", "type": "String", "mandatory": true, "notNull": true, "collate": "default" },
+                { "name": "action", "type": "String"}
+            ]
+        },
+        {
+            "name": "indicator",
+            "superclass": "core",
+            "properties": [
+                { "name": "description", "type": "String", "collate": "default" },
+                { "name": "kill_chain_phases", "type": "EmbeddedList", "collate": "default" },
+                { "name": "name", "type": "String", "mandatory": true, "notNull": true, "collate": "default" },
+                { "name": "pattern", "type": "String", "mandatory": true, "notNull": true, "collate": "default" },
+                { "name": "valid_from", "type": "DateTime", "collate": "default" },
+                { "name": "valid_until", "type": "DateTime", "collate": "default" }
+            ]
+        },
+        {
+            "name": "observedData",
+            "superclass": "core",
+            "properties": [
+                { "name": "first_observed", "type": "DateTime", "collate": "default" },
+                { "name": "last_observed", "type": "DateTime", "collate": "default" },
+                { "name": "number_observed", "type": "Integer", "mandatory": true, "notNull": true, "collate": "default" },
+                { "name": "objects_", "type": "EmbeddedMap", "collate": "default" }
+            ]
+        }
+    ]
+}

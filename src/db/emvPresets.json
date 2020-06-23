@@ -1,0 +1,865 @@
+{
+    "default": [
+        {
+            "id": "1",
+            "category": "Applicability",
+            "characteristics": [
+                {
+                    "id": "0",
+                    "weight": "1",
+                    "characteristic": "Applicability",
+                    "total_score": "0",
+                    "attributes": [
+                        {
+                            "attribute": "Can the EMV affect the configuration?",
+                            "scores": [
+                                {
+                                    "description": "Could not apply to configuration",
+                                    "score": 0
+                                },
+                                {
+                                    "description": "Could apply with major changes to configuration or EMV",
+                                    "score": 0.2
+                                },
+                                {
+                                    "description": "Could apply with monor changes to configuration or EMV",
+                                    "score": 0.7
+                                },
+                                {
+                                    "description": "Could apply with no changes to configuration or EMV",
+                                    "score": 1
+                                },
+                                {
+                                    "description": "default",
+                                    "score": 0.5
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "2",
+            "category": "Adversary",
+            "characteristics": [
+                {
+                    "id": "1",
+                    "characteristic": "Motivation",
+                    "total_score": "0",
+                    "weight": "0.5",
+                    "attributes": [
+                        {
+                            "attribute": "Motivation/Outcome Desired",
+                            "scores": [
+                                {
+                                    "description": "Information gathering",
+                                    "score": 0.1
+                                },
+                                {
+                                    "description": "Messaging",
+                                    "score": 0.3
+                                },
+                                {
+                                    "description": "National disruption",
+                                    "score": 0.45
+                                },
+                                {
+                                    "description": "Terrorism",
+                                    "score": 0.6
+                                },
+                                {
+                                    "description": "Escalating political/military tensions",
+                                    "score": 0.8
+                                },
+                                {
+                                    "description": "War",
+                                    "score": 0.95
+                                },
+                                {
+                                    "description": "default",
+                                    "score": 0.5
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "2",
+                    "characteristic": "Capability",
+                    "total_score": "0",
+                    "weight": "0.5",
+                    "attributes": [
+                        {
+                            "attribute": "Adversary Backing",
+                            "scores": [
+                                {
+                                    "description": "Script kiddie",
+                                    "score": 0.1
+                                },
+                                {
+                                    "description": "Hacker",
+                                    "score": 0.3
+                                },
+                                {
+                                    "description": "Elite hacker",
+                                    "score": 0.5
+                                },
+                                {
+                                    "description": "Organized crime",
+                                    "score": 0.7
+                                },
+                                {
+                                    "description": "Nation state",
+                                    "score": 0.8
+                                },
+                                {
+                                    "description": "Advanced nation state",
+                                    "score": 1
+                                },
+                                {
+                                    "description": "default",
+                                    "score": 0.3
+                                }
+                            ]
+                        },
+                        {
+                            "attribute": "Threat Actor Activity",
+                            "scores": [
+                                {
+                                    "description": "No exploits, no research",
+                                    "score": 0.1
+                                },
+                                {
+                                    "description": "Research in area, no components or exploits/malware",
+                                    "score": 0.4
+                                },
+                                {
+                                    "description": "Own components, no exploit",
+                                    "score": 0.65
+                                },
+                                {
+                                    "description": "Have exploits against process",
+                                    "score": 1
+                                },
+                                {
+                                    "description": "default",
+                                    "score": 0.3
+                                }
+                            ]
+                        },
+                        {
+                            "attribute": "Research Areas",
+                            "scores": [
+                                {
+                                    "description": "None",
+                                    "score": 0
+                                },
+                                {
+                                    "description": "Cyber IT",
+                                    "score": 0.1
+                                },
+                                {
+                                    "description": "Control system process understanding",
+                                    "score": 0.4
+                                },
+                                {
+                                    "description": "Critical infrastructure sector research",
+                                    "score": 0.65
+                                },
+                                {
+                                    "description": "Component or device research",
+                                    "score": 1
+                                },
+                                {
+                                    "description": "default",
+                                    "score": 0.3
+                                }
+                            ]
+                        },
+                        {
+                            "attribute": "Strategic Gain to Adversary",
+                            "scores": [
+                                {
+                                    "description": "None",
+                                    "score": 0
+                                },
+                                {
+                                    "description": "International standing",
+                                    "score": 0.2
+                                },
+                                {
+                                    "description": "Resources",
+                                    "score": 0.35
+                                },
+                                {
+                                    "description": "Supply chain presence",
+                                    "score": 0.5
+                                },
+                                {
+                                    "description": "All three",
+                                    "score": 1
+                                },
+                                {
+                                    "description": "default",
+                                    "score": 0.3
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "category": "Exploit, Malware, and Vulnerability",
+            "characteristics": [
+                {
+                    "id": "3",
+                    "characteristic": "Urgency",
+                    "total_score": "0",
+                    "weight": "0.2",
+                    "attributes": [
+                        {
+                            "attribute": "Mobility of Infection",
+                            "scores": [
+                                {
+                                    "description": "Immobile",
+                                    "score": 0.3
+                                },
+                                {
+                                    "description": "Mobile via network or application",
+                                    "score": 0.5
+                                },
+                                {
+                                    "description": "Ability to jump air gap",
+                                    "score": 0.9
+                                },
+                                {
+                                    "description": "default",
+                                    "score": 0.3
+                                }
+                            ]
+                        },
+                        {
+                            "attribute": "Past Incident Source/Credibility",
+                            "scores": [
+                                {
+                                    "description": "Media reporting",
+                                    "score": 0.1
+                                },
+                                {
+                                    "description": "Industry reporting",
+                                    "score": 0.3
+                                },
+                                {
+                                    "description": "Cyber research industry reporting",
+                                    "score": 0.5
+                                },
+                                {
+                                    "description": "First hand analysis and reporting",
+                                    "score": 0.7
+                                },
+                                {
+                                    "description": "Intelligence Community reporting",
+                                    "score": 0.9
+                                },
+                                {
+                                    "description": "default",
+                                    "score": 0.3
+                                }
+                            ]
+                        },
+                        {
+                            "attribute": "Availability",
+                            "scores": [
+                                {
+                                    "description": "Vulnerability known",
+                                    "score": 0.1
+                                },
+                                {
+                                    "description": "Exploit/malware available but not on hacker/general sites",
+                                    "score": 0.3
+                                },
+                                {
+                                    "description": "Exploit/malware available on hacker sites",
+                                    "score": 0.5
+                                },
+                                {
+                                    "description": "Exploit/malware available on 'exploit framework'",
+                                    "score": 1
+                                },
+                                {
+                                    "description": "default",
+                                    "score": 0.3
+                                }
+                            ]
+                        },
+                        {
+                            "attribute": "Repeatability",
+                            "scores": [
+                                {
+                                    "description": "Low degree of repeatability (~<25%)",
+                                    "score": 0
+                                },
+                                {
+                                    "description": "Moderate degree of repeatability (~25-50%)",
+                                    "score": 0.3
+                                },
+                                {
+                                    "description": "High degree of repeatability (50-75%)",
+                                    "score": 0.5
+                                },
+                                {
+                                    "description": "Very high degree of repeatability (~>75%)",
+                                    "score": 1
+                                },
+                                {
+                                    "description": "default",
+                                    "score": 0.3
+                                }
+                            ]
+                        },
+                        {
+                            "attribute": "Portability",
+                            "scores": [
+                                {
+                                    "description": "No ability to port exploit",
+                                    "score": 0
+                                },
+                                {
+                                    "description": "Ability to port exploit with changes within system manufacturer",
+                                    "score": 0.2
+                                },
+                                {
+                                    "description": "Ability to port exploit without changes within system manufacturer",
+                                    "score": 0.4
+                                },
+                                {
+                                    "description": "Ability to port exploit with changes across manufacturers",
+                                    "score": 0.8
+                                },
+                                {
+                                    "description": "Ability to port exploit without changes across manufacturers",
+                                    "score": 1
+                                },
+                                {
+                                    "description": "default",
+                                    "score": 0.3
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "4",
+                    "characteristic": "Maturity/Sophistication",
+                    "total_score": "0",
+                    "weight": "0.3",
+                    "attributes": [
+                        {
+                            "attribute": "Persistence",
+                            "scores": [
+                                {
+                                    "description": "Cannot re-establish foot-hold",
+                                    "score": 0
+                                },
+                                {
+                                    "description": "Can re-establish foot-hold",
+                                    "score": 0.25
+                                },
+                                {
+                                    "description": "Can pivot or other methods to move",
+                                    "score": 0.5
+                                },
+                                {
+                                    "description": "Capable of sleep/hiding",
+                                    "score": 1
+                                },
+                                {
+                                    "description": "default",
+                                    "score": 0.3
+                                }
+                            ]
+                        },
+                        {
+                            "attribute": "Stealth",
+                            "scores": [
+                                {
+                                    "description": "Does not remove evidence at beginning or during operation",
+                                    "score": 0
+                                },
+                                {
+                                    "description": "Removes evidence at installation or exit",
+                                    "score": 0.35
+                                },
+                                {
+                                    "description": "Removes evidence during operation",
+                                    "score": 0.5
+                                },
+                                {
+                                    "description": "Removes evidence at installation/exit and during operation",
+                                    "score": 1
+                                },
+                                {
+                                    "description": "default",
+                                    "score": 0.3
+                                }
+                            ]
+                        },
+                        {
+                            "attribute": "Code Maturity",
+                            "scores": [
+                                {
+                                    "description": "Monolithic code base",
+                                    "score": 0
+                                },
+                                {
+                                    "description": "Moderate code base",
+                                    "score": 0.35
+                                },
+                                {
+                                    "description": "Small efficient code base",
+                                    "score": 0.6
+                                },
+                                {
+                                    "description": "Modular or obfuscated code base",
+                                    "score": 1
+                                },
+                                {
+                                    "description": "default",
+                                    "score": 0.3
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "5",
+                    "characteristic": "Functional Impact",
+                    "total_score": "0",
+                    "weight": "0.5",
+                    "attributes": [
+                        {
+                            "attribute": "Functional Impact",
+                            "scores": [
+                                {
+                                    "description": "Foothold on component",
+                                    "score": 0.05
+                                },
+                                {
+                                    "description": "Escalate privileges",
+                                    "score": 0.1
+                                },
+                                {
+                                    "description": "Pivot to another component",
+                                    "score": 0.15
+                                },
+                                {
+                                    "description": "Discover architecture",
+                                    "score": 0.2
+                                },
+                                {
+                                    "description": "Discover process",
+                                    "score": 0.25
+                                },
+                                {
+                                    "description": "Data ex-filtration",
+                                    "score": 0.3
+                                },
+                                {
+                                    "description": "Degraded resource",
+                                    "score": 0.4
+                                },
+                                {
+                                    "description": "Spoof or change status",
+                                    "score": 0.55
+                                },
+                                {
+                                    "description": "Inject control command",
+                                    "score": 0.6
+                                },
+                                {
+                                    "description": "Loss of situation awareness",
+                                    "score": 0.75
+                                },
+                                {
+                                    "description": "Loss of confidence",
+                                    "score": 0.9
+                                },
+                                {
+                                    "description": "Loss of control",
+                                    "score": 0.95
+                                },
+                                {
+                                    "description": "Physical damage",
+                                    "score": 1
+                                },
+                                {
+                                    "description": "default",
+                                    "score": 0.3
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "category": "Defense Complexity",
+            "characteristics": [
+                {
+                    "id": "6",
+                    "characteristic": "Difficulty to Detect",
+                    "total_score": "0",
+                    "weight": "0.25",
+                    "attributes": [
+                        {
+                            "attribute": "Opportunities to Detect",
+                            "scores": [
+                                {
+                                    "description": ">=7 kill chain opportunities",
+                                    "score": 0.1
+                                },
+                                {
+                                    "description": "5-6 kill chain opportunities",
+                                    "score": 0.25
+                                },
+                                {
+                                    "description": "3-4 kill chain opportunities",
+                                    "score": 0.5
+                                },
+                                {
+                                    "description": "2 kill chain opportunities",
+                                    "score": 0.75
+                                },
+                                {
+                                    "description": "Single kill chain opportunity",
+                                    "score": 1
+                                },
+                                {
+                                    "description": "Only network access required",
+                                    "score": 1
+                                },
+                                {
+                                    "description": "default",
+                                    "score": 0.75
+                                }
+                            ]
+                        },
+                        {
+                            "attribute": "System Level Monitoring",
+                            "scores": [
+                                {
+                                    "description": "Capability exists to correlate traditional logs with events",
+                                    "score": 0.4
+                                },
+                                {
+                                    "description": "Capability exists to correlate traditional logs",
+                                    "score": 0.6
+                                },
+                                {
+                                    "description": "Traditional Log monitoring on system with no correlation",
+                                    "score": 0.8
+                                },
+                                {
+                                    "description": "No Monitoring available",
+                                    "score": 1
+                                },
+                                {
+                                    "description": "default",
+                                    "score": 0.5
+                                }
+                            ]
+                        },
+                        {
+                            "attribute": "EM Detection",
+                            "scores": [
+                                {
+                                    "description": "Known behavior and signature can be handled by common IT",
+                                    "score": 0.1
+                                },
+                                {
+                                    "description": "Behavior can be characterized and identified via traditional logs",
+                                    "score": 0.3
+                                },
+                                {
+                                    "description": "Polymorphic software or temporal detection",
+                                    "score": 0.7
+                                },
+                                {
+                                    "description": "No detection",
+                                    "score": 1
+                                },
+                                {
+                                    "description": "default",
+                                    "score": 0.3
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "7",
+                    "characteristic": "Difficulty to Fix",
+                    "total_score": "0",
+                    "weight": "0.75",
+                    "attributes": [
+                        {
+                            "attribute": "Inoculation",
+                            "scores": [
+                                {
+                                    "description": "Ability to block and remove",
+                                    "score": 0.08
+                                },
+                                {
+                                    "description": "Isolatable to one component",
+                                    "score": 0.15
+                                },
+                                {
+                                    "description": "Multiple component isolation possible ",
+                                    "score": 0.25
+                                },
+                                {
+                                    "description": "Ability to remove but cannot block",
+                                    "score": 0.6
+                                },
+                                {
+                                    "description": "Ability to block with system build or replacement",
+                                    "score": 0.9
+                                },
+                                {
+                                    "description": "default",
+                                    "score": 0.5
+                                }
+                            ]
+                        },
+                        {
+                            "attribute": "Vulnerability and Patching",
+                            "scores": [
+                                {
+                                    "description": "Patch is deployed or scheduled to be deployed",
+                                    "score": 0
+                                },
+                                {
+                                    "description": "Known patch is available and tested for operational impact",
+                                    "score": 0.4
+                                },
+                                {
+                                    "description": "Known patch is available and feasible",
+                                    "score": 0.6
+                                },
+                                {
+                                    "description": "Known patch is available",
+                                    "score": 0.8
+                                },
+                                {
+                                    "description": "No patch is available or patching is infeasible or not applicable",
+                                    "score": 1
+                                },
+                                {
+                                    "description": "default",
+                                    "score": 0.5
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "category": "Control Consequences",
+            "characteristics": [
+                {
+                    "id": "8",
+                    "characteristic": "Command & Control Impact",
+                    "total_score": "0",
+                    "weight": "0.5",
+                    "attributes": [
+                        {
+                            "attribute": "System level impairment",
+                            "scores": [
+                                {
+                                    "description": "No impact",
+                                    "score": 0
+                                },
+                                {
+                                    "description": "Slowed actions or updates",
+                                    "score": 0.4
+                                },
+                                {
+                                    "description": "Slowed response",
+                                    "score": 0.4
+                                },
+                                {
+                                    "description": "Loss of C2 (comand and control)",
+                                    "score": 0.9
+                                },
+                                {
+                                    "description": "Loss of situational awareness",
+                                    "score": 0.9
+                                },
+                                {
+                                    "description": "default",
+                                    "score": 0.3
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "9",
+                    "characteristic": "Equipment Impact",
+                    "total_score": "0",
+                    "weight": "0.5",
+                    "attributes": [
+                        {
+                            "attribute": "System level equipment damage",
+                            "scores": [
+                                {
+                                    "description": "No impact",
+                                    "score": 0
+                                },
+                                {
+                                    "description": "Loss of networked access and control",
+                                    "score": 0.3
+                                },
+                                {
+                                    "description": "Loss of configuration",
+                                    "score": 0.6
+                                },
+                                {
+                                    "description": "Isolated physical damage",
+                                    "score": 0.8
+                                },
+                                {
+                                    "description": "Extensive physical damage",
+                                    "score": 1
+                                },
+                                {
+                                    "description": "default",
+                                    "score": 0.3
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "category": "Company Consequences",
+            "characteristics": [
+                {
+                    "id": "10",
+                    "characteristic": "Personnel & Public Impact",
+                    "total_score": "0",
+                    "weight": "0.33",
+                    "attributes": [
+                        {
+                            "attribute": "Personnel & Public injury",
+                            "scores": [
+                                {
+                                    "description": "No impact",
+                                    "score": 0
+                                },
+                                {
+                                    "description": "Degraded life safety control",
+                                    "score": 0.3
+                                },
+                                {
+                                    "description": "Potential injury to personnel",
+                                    "score": 0.7
+                                },
+                                {
+                                    "description": "Potential injury to public",
+                                    "score": 0.9
+                                },
+                                {
+                                    "description": "Potential loss of life",
+                                    "score": 1
+                                },
+                                {
+                                    "description": "default",
+                                    "score": 0.1
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "11",
+                    "characteristic": "System Failure Impact",
+                    "total_score": "0",
+                    "weight": "0.34",
+                    "attributes": [
+                        {
+                            "attribute": "Brown out / blackout",
+                            "scores": [
+                                {
+                                    "description": "No impact",
+                                    "score": 0
+                                },
+                                {
+                                    "description": "Brown out / rolling brown out",
+                                    "score": 0.1
+                                },
+                                {
+                                    "description": "Short duration blackout / small MW",
+                                    "score": 0.3
+                                },
+                                {
+                                    "description": "Long duration blackout / large MW",
+                                    "score": 0.8
+                                },
+                                {
+                                    "description": "Cascading blackout",
+                                    "score": 0.9
+                                },
+                                {
+                                    "description": "Cold black start",
+                                    "score": 1
+                                },
+                                {
+                                    "description": "default",
+                                    "score": 0.1
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "12",
+                    "characteristic": "Company Reputation Impact",
+                    "total_score": "0",
+                    "weight": "0.33",
+                    "attributes": [
+                        {
+                            "attribute": "Relations with stakeholders",
+                            "scores": [
+                                {
+                                    "description": "No impact",
+                                    "score": 0
+                                },
+                                {
+                                    "description": "Disputes with commissioners",
+                                    "score": 0.2
+                                },
+                                {
+                                    "description": "Disputes with public",
+                                    "score": 0.4
+                                },
+                                {
+                                    "description": "Public loss of confidence in company",
+                                    "score": 1
+                                },
+                                {
+                                    "description": "default",
+                                    "score": 0.1
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

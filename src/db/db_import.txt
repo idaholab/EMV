@@ -1,0 +1,1 @@
+SET ignoreErrors true; DROP database remote:localhost/emv root OrientPW plocal; SET ignoreErrors false;Create Database remote:localhost/emv root OrientPW plocal; IMPORT Database /home/developer/repos/CES21/EMV/src/db/UseCases2.export.gz -preserveClusterIDs=true

@@ -1,0 +1,500 @@
+/* Dark Palette
+    #383c4a
+    #404552
+    #4b5162
+    #5294e2
+    #7c818c
+*/
+/* Color Schema
+  #eb7777
+  #ffc97f
+  #72A5D8
+  #D6D872
+  #A5D872
+  #c9e7db
+*/
+
+/* Color Blind Safe
+    #CC6677
+    #DDCC77
+    #88CCEE
+    #44AA99
+    #117733
+    #332288
+    #AA4499
+    #882255
+*/
+
+html, body {
+    background-color: #383c4a;
+    box-sizing: border-box;
+    font-family: Inconsolata;
+    /* font-family: Arial, Helvetica, sans-serif; */
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 5px;
+}
+
+button {
+    background-color: #5294e2;
+    border: none;
+    border-radius: 5px;
+    color: inherit;
+    padding: 5px;
+    margin: 5px;
+    font-size: 1.25em;
+}
+
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: "Inconsolata";
+    font-weight: bold;
+    src: url("../fonts/Inconsolata-Regular.ttf") format("ttf"),
+         url("../fonts/Inconsolata-Bold.ttf") format("ttf");
+}
+
+.App-header {
+    /* background-color: rgb(216, 211, 201); */
+    background-color: #404552;
+    /* display: flex; */
+    width: 100%;
+    height: 50px;
+    display: grid;
+    grid-template-columns: 9fr 2fr 1fr;
+    line-height: 50px;
+}
+
+.App-logo {
+
+}
+
+.Footer {
+    /* background-color: rgb(216, 211, 201); */
+    background-color: #404552;
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    width: 100%;
+}
+
+.Resizer {
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    background-clip: padding-box;
+    background: #000;
+    opacity: .2;
+    z-index: 1;
+}
+
+.Resizer:hover {
+    -webkit-transition: all 2s ease;
+    transition: all 2s ease;
+}
+
+.Resizer.horizontal {
+    border-bottom: 2px solid rgba(255, 255, 255, 0);
+    border-top: 2px solid rgba(255, 255, 255, 0);
+    cursor: row-resize;
+    height: 5px;
+    margin: 5px 0px;
+    width: 100%;
+}
+
+.Resizer.horizontal:hover {
+    border-bottom: 5px solid rgba(0, 0, 0, 0.5);
+    border-top: 5px solid rgba(0, 0, 0, 0.5);
+}
+
+.Resizer.vertical {
+    border-left: 2px solid rgba(255, 255, 255, 0);
+    border-right: 2px solid rgba(255, 255, 255, 0);
+    cursor: col-resize;
+    margin: 0px 5px;
+    width: 5px;
+}
+
+.Resizer.vertical:hover {
+    border-left: 2px solid rgba(0, 0, 0, 0.5);
+    border-right: 2px solid rgba(0, 0, 0, 0.5);
+}
+
+.Resizer.disabled {
+    cursor: not-allowed;
+}
+
+.Resizer.disabled:hover {
+    border-color: transparent;
+}
+
+._infoSection {
+  padding-right: 25px;
+  padding-left: 10px;
+}
+
+/*can set just .Pane*/
+.Pane.vertical {
+  overflow: auto;
+}
+
+.Login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
+
+}
+
+.page-title {
+    padding-top: 5px;
+    padding-bottom: 30px;
+}
+
+.panel {
+  width: 80%;
+  margin-top: auto;
+  margin-left: auto;
+  margin-right: auto;
+  background: #4b5162;
+  border-color: #f4f4f4;
+}
+
+/*Tables*/
+.characteristics-list {
+  text-align: left;
+}
+
+.user-list {
+    text-align: left;
+}
+.config-list {
+    text-align: left;
+}
+
+.Wrapper {
+    color: #f4f4f4;
+    text-align: center;
+    font-size: 1.1em;
+}
+
+
+.searchBars {
+  padding-top:10px;
+  padding-right: 25%;
+  padding-left: 16.5%;
+}
+
+.modal-content {
+    background-color: #404552;
+    color: #f4f4f4;
+}
+
+.nav-tabs {
+    border-bottom: 1px solid #333333;
+    float: none;
+    display:inline-block;
+    text-align:center;
+
+}
+
+.nav-tabs > li.active > a {
+    background-color: #4b5162;
+    text-decoration: none;
+    color: inherit;
+    border: 1px solid #333333;
+}
+
+.nav-tabs > li.active > a:hover {
+    background-color: #a3a6ae;
+    border: 1px solid #333333;
+    color: inherit;
+}
+
+.nav-tabs > li.active > a:focus {
+    background-color: #7c818c;
+    border: 1px solid #333333;
+    color: inherit;
+}
+
+.nav-tabs > li > a {
+    text-decoration: none;
+    color: inherit;
+    border-bottom: 1px solid #333333;
+}
+
+.nav-tabs > li > a:hover {
+    background-color: #a3a6ae;
+    border: 1px solid #333333;
+    color: inherit;
+}
+
+.down-arrow {
+    font-size: 0.75em;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #4b5162;
+    z-index: 2;
+    margin-top: -1px;
+}
+
+.dropdown-content li {
+    padding: 0 50px 0 5px;
+    list-style-type: none;
+}
+
+.dropdown-content li:hover {
+    background-color: #7c818c;
+}
+
+.dropdown-content ul {
+    margin: 0;
+    padding: 0;
+}
+
+.form-error-msg {
+    color: red;
+}
+
+.btn-red {
+    background-color: #d9534f;
+}
+
+.btn-disabled {
+    background-color: #7c818c;
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.back-btn-container {
+    text-align: left;
+}
+
+.loading-page-container{
+    text-align: center;
+    vertical-align: middle;
+    margin: auto;
+}
+
+.report-chart {
+    /* background-color: #4C4F5A; */
+    width: 90%;
+}
+
+#chart-container {
+    height: 800px;
+    text-align: left;
+}
+
+#individual-view {
+    width: 75%;
+}
+
+#create-cis-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto auto auto auto auto;
+    grid-gap: 25px;
+    grid-template-areas:
+        "cisConf cisCrit . . ."
+        "cisName cisTicket . . ."
+        "cisTicketMemo cisTicketMemo . . ."
+        "cisDesc cisDesc . . ."
+        ". . cisButton . .";
+}
+
+#cis-config-wrapper {
+    grid-area: cisConf;
+}
+
+#cis-criteria-wrapper {
+    grid-area: cisCrit;
+}
+
+#cis-name-wrapper {
+    grid-area: cisName;
+}
+
+#cis-ticket-wrapper {
+    grid-area: cisTicket;
+}
+
+#cis-ticket-memo-wrapper {
+    grid-area: cisTicketMemo;
+}
+
+#cis-desc-wrapper {
+    grid-area: cisDesc;
+}
+
+#cis-button-wrapper {
+    grid-area: cisButton;
+}
+
+#header-title {
+    text-align: left;
+    font-size: 1.5em;
+    margin-left: 10px;
+}
+
+#btn-logout {
+    background-color: #5294e2;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#btn-userportal {
+    cursor: pointer;
+    text-align: left;
+}
+
+#btn-userportal:hover .dropdown-content {
+    display: block;
+}
+
+#btn-userportal span{
+    padding: 5px;
+}
+
+#CategoryTabs .row {
+  margin-left: 15px;
+  margin-right: 0px;
+}
+
+#loader {
+	border: 4px solid #f4f4f4;
+	border-top: 4px solid #5294e2;
+	border-radius: 50%;
+	width: 30px;
+	height: 30px;
+	animation: spin 2s linear infinite;
+	margin: 0 auto;
+}
+
+@keyframes spin {
+	0% {transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
+}
+
+#CategoryTabs .row {
+  margin-left: 15px;
+  margin-right: 0px;
+}
+
+#reportView-tabs {
+    text-align: left;
+}
+
+#ScoreInProgress{
+    padding: 5px;
+}
+
+
+/*Attempting to change the color of our list*/
+.test0.active > a{
+  background-color: blue;
+}
+
+.test0.active > a:hover{
+  background-color: green;
+}
+.test0.active > a:focus{
+  background-color: white;
+}
+
+/**works/
+/* .test0.active{
+  background-color: green;
+  color: yellow;
+} */
+.test1{
+  color: black;
+  background-color: #332288;
+}
+.test1{
+  color: black;
+  background-color: #CC6677;
+}
+.test2 {
+  color: black;
+  background-color: #DDCC77;
+}
+.test3 {
+  color: black;
+  background-color: #88CCEE;
+}
+.test4 {
+  color: black;
+  background-color: #44AA99;
+}
+.test5 {
+  color: black;
+  background-color: #117733;
+}
+
+.scores1 {
+  width: 200px;
+}
+
+.container {
+    /* padding-right: 165px; */
+    /* padding-left: 15px; */
+    margin-right: auto;
+    margin-left: auto;
+}
+
+
+/*Padding Nonsense*/
+div.noPadding {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+div.noMargin {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+div.clearfix {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+div.characteristics-table-container {
+  display: flex;
+}
+
+.characteristics-table-fixed {
+  width: 5%;
+  writing-mode: vertical-rl;
+  text-orientation: sideways;
+  height: 100px;
+}
+
+.characteristics-table-tableflex {
+  flex-grow: 1;
+}
+
+div.FormSubmit {
+  padding: 10px;
+}
+
+div.CisList{
+  padding: 10%;
+}
+
+/* .reasoningField {
+  padding: 20%;
+} */
