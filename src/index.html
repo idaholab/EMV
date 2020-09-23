@@ -3,7 +3,7 @@
 <head>
   <title>Cyber Issue Scoring</title>
   <!--Setting Content Security Policy off this meta tag, since we are using a native application-->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self' 'unsafe-inline'; font-src 'self'; script-src 'unsafe-inline'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self' 'unsafe-inline'; font-src 'self'; script-src 'unsafe-inline' 'unsafe-eval'">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
   <link rel="stylesheet" href="./assets/css/App.css" />
@@ -16,14 +16,13 @@
 <script type="text/tsx">
   import * as React from 'react';
   import * as ReactDOM from 'react-dom';
-  // console.log(process.versions);
   let render = () => {
     const { App } = require('./app');
     ReactDOM.render(<App />, document.getElementById('App'));
   }
   render();
 
-// Allows hot reloading, not sure if we need this after developing.
+// TODO: Allows hot reloading, not sure if we need this after developing.
   if (module.hot) {
     module.hot.accept(render)
   }

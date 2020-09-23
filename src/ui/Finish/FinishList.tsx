@@ -4,10 +4,17 @@ Copyright 2020 Southern California Edison Company
 ALL RIGHTS RESERVED
 */
 
+/*Libraries*/
 import * as React from 'react';
-import * as SplitPane from 'react-split-pane';
+import SplitPane from 'react-split-pane'
+/*Custom*/
 import {ListGroup, ListGroupItem} from 'react-bootstrap';
 
+/*
+  Handles the list when moving to 'Finished'
+  TODO: Make sure state is set when mounting (ala. fix the issue when scoring an object and never 'selecting' the CIS you are scoring showing blank on report view)
+  TODO: rename to ReportView
+*/
 class FinishList extends React.Component {
     constructor(props) {
         super(props);
@@ -21,7 +28,6 @@ class FinishList extends React.Component {
 
     private componentDidMount() {
         const self = this;
-        //.where(queryFinished).
         const queryResults = this.props.db.select().from('CIS').all()
         .then(
             function(queryR) {
@@ -47,8 +53,6 @@ class FinishList extends React.Component {
                 }
             }
           );
-
-        // console.log('--FinishList Mounted--');
     }
 
     private handleClick = async (selected) => {

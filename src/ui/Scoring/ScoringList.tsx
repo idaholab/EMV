@@ -4,13 +4,18 @@ Copyright 2020 Southern California Edison Company
 ALL RIGHTS RESERVED
 */
 
+/*Libraries*/
 import * as React from 'react';
-import * as SplitPane from 'react-split-pane';
+import SplitPane from 'react-split-pane'
+import {ListGroup, ListGroupItem} from 'react-bootstrap';
+/*Custom*/
 import {inProgressList} from '../../db/mockAPI';
 import {finishList} from '../../db/mockAPI';
 
-import {ListGroup, ListGroupItem} from 'react-bootstrap';
-
+/*
+  Functionality that shows the scoring list and handles the application's state of which item from the list
+  is selected
+*/
 class ScoringList extends React.Component {
 
   constructor(props) {
@@ -22,40 +27,30 @@ class ScoringList extends React.Component {
     };
 
   }
-  /*TODO: Check if empty*/
+
   private componentDidMount() {
 
     const self = this;
-    // const queryResults = this.props.db.select().from('CIS').all()
-    // .then(
-    //     function(queryR) {
-    //        console.log('AAH', queryR);
-    //         if (queryR) {
-    //             self.setState({
-    //                 progressList: queryR
-    //             });
-    //         } else {
-    //             console.log('Error. No CIS array found in progressList');
-    //         }
-    //     }
+
     const queryResults = this.props.db.select().from(this.props.uid).one()
       .then(
         function(queryR) {
           if (queryR) {
-            for (const cisid of queryR.cis_list_in_progress) {
-              const query = self.props.db.select().from(cisid.toString()).one()
-                .then(
-                  function(query) {
-                    self.setState((prevState) => ({
-                      progressList: [...prevState.progressList, query]
-                    });
-                  }
-                );
-            }
-            // self.setState({
-            //     progressList: queryR.cis_list_in_progress.toString()
-            // });
-            // console.log(this.state.progressList);
+	           console.log('our query', queryR);
+	           if(queryR.cis_list_in_progress){
+             for (const cisid of queryR.cis_list_in_progress) {
+               const query = self.props.db.select().from(cisid.toString()).one()
+                	.then(
+                  	function(query) {
+                    		self.setState((prevState) => ({
+                      			progressList: [...prevState.progressList, query]
+                    		}));
+                  	}
+                	);
+            	}
+	           } else {
+	    	         console.log('Error. progressList found');
+             }
 
           } else {
             console.log('Error. No CIS array found in progressList');
@@ -81,18 +76,7 @@ class ScoringList extends React.Component {
 
       const thisList = this.state.progressList.map((ListItem, index) => {
             const name = ListItem.name;
-            // // if (this.props.currentCis);
-            // if (this.state.selectedName === name) {
-            //     return(
-            //         <ListGroupItem style={lgiStyle} key = {index} onClick={ () => this.handleClick(ListItem)} active>{name}</ListGroupItem>
-            //     );
-            // } else {
-            //     return(
-            //         <ListGroupItem style={lgiStyle} key = {index} onClick={ () => this.handleClick(ListItem)}>{name}</ListGroupItem>
-            //     );
-            // }
-            // if (this.props.defaultCis) {
-            //     if (name === this.props.defaultCis.name) {
+
             if (this.props.currentCIS) {
                 if (name === this.props.currentCIS.name) {
                     return(

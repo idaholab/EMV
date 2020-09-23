@@ -4,10 +4,20 @@ Copyright 2020 Southern California Edison Company
 ALL RIGHTS RESERVED
 */
 
+/*Libraries*/
 import * as React from 'react';
-import * as emvPresets from '../../db/emvPresets.json';
 import { FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
+/*Custom*/
+import * as emvPresets from '../../db/emvPresets.json';
 
+/*
+  Manages the creation of Cyber Issue and moves to the Scoring tab
+  TODO: Call CreateFunctions method rather than duplicating inside this file
+  TODO: Validate Input and make sure Configuration and Criteria Set are selected
+  TODO: Sanitize inputs
+  TODO: Allow customizing and selecting different Critera Sets
+  TODO: Check to see if CIS is already created  under that name and Configuration
+*/
 class CreateCIS extends React.Component {
     constructor(props) {
         super(props);
@@ -80,12 +90,10 @@ class CreateCIS extends React.Component {
             owner: this.props.uid,
             status: 'progress'
         }).one();
-        // console.log('Created CIS: ' + cis.name);
-        //Create edge
+
         cisID = cis['@rid'];
         belongsTo = await db.create('EDGE', 'belongs_to')
         .from(cisID).to(this.state.cisConfiguration).one();
-        // console.log(belongsTo);
 
         //Create categories
         for (const catObj of emvPresets.default) {
@@ -94,12 +102,10 @@ class CreateCIS extends React.Component {
                 name: catObj.category,
                 total_score: 0
             }).one();
-            // console.log('Created Category: ' + category.name);
-            //Create edge
+
             categoryID = category['@rid'];
             categoryOf = await db.create('EDGE', 'category_of')
             .from(categoryID).to(cisID).one();
-            // console.log(categoryOf);
 
             //Create characteristics
             for (const charObj of catObj.characteristics) {
@@ -109,12 +115,10 @@ class CreateCIS extends React.Component {
                     total_score: 0,
                     weight: charObj.weight
                 }).one();
-                // console.log('Created Characteristic: ' + characteristic.name);
-                //Create edge
+
                 characteristicID = characteristic['@rid'];
                 characteristicOf = await db.create('EDGE', 'characteristic_of')
                 .from(characteristicID).to('#' + categoryOf.out.cluster + ':' + categoryOf.out.position).one();
-                // console.log(characteristicOf);
 
                 //Create attributes
                 for (const attObj of charObj.attributes) {
@@ -125,12 +129,10 @@ class CreateCIS extends React.Component {
                         user_weight: 1,
                         weighted_score: 0
                     }).one();
-                    //console.log('Created Attribute: ' + attribute.name);
-                    //Create edge
+
                     attributeID = attribute['@rid'];
                     attributeOf = await db.create('EDGE', 'attribute_of')
                     .from(attributeID).to('#' + characteristicOf.out.cluster + ':' + characteristicOf.out.position).one();
-                    //console.log(attributeOf);
 
                     //Create Score Guidances
                     for (const scoreObj of attObj.scores) {
@@ -140,12 +142,10 @@ class CreateCIS extends React.Component {
                             score: scoreObj.score,
                             chosen: false
                         }).one();
-                        //console.log('Created Score: ' + score.description);
-                        //Create edge
+
                         scoreID = score['@rid'];
                         scoreOf = await db.create('EDGE', 'score_guidance_of')
                         .from(scoreID).to('#' + attributeOf.out.cluster + ':' + attributeOf.out.position).one().then();
-                        //console.log(scoreOf);
                     }
                 }
             }
@@ -205,7 +205,6 @@ class CreateCIS extends React.Component {
         .set({
             jsonRep: JSON.stringify(jsToJSON);
         }).one();
-        //console.log('Updated CIS JSON');
 
     };
 
@@ -219,15 +218,12 @@ class CreateCIS extends React.Component {
 
         event.preventDefault();
 
-        //TODO: Validate Input and make sure Configuration and Criteria Set are selected
-        //TODO: Sanitize inputs
-
         const db = this.props.db;
         this.createDefault(db, this);
 
     }
 
-    /*    //This is to be added to render() below when criteriaSets can be edited.
+    /*    //This is to be added to render() below when criteriaSets can be edited within the application.
           //'default' is the only currently working criteriaSet
 
     <div id='cis-criteria-wrapper'>

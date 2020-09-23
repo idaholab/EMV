@@ -8,6 +8,7 @@ ALL RIGHTS RESERVED
 import * as React from 'react';
 import MainPane from './MainPane';
 
+/*Main React component*/
 export default class Main extends React.Component {
 
     constructor(props) {

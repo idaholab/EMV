@@ -33,14 +33,6 @@ NOTE: It is recommended to make a backup before modifying emvPresets.json
 
 `cp emvPresets.json emvPresetsBackup.json`
 
-
-You can add in as many Categories/Characteristics/Attributes and Scores, as long as they follow the schema.
-
-caveat: Each Category is made up of multiple Charactersitics, their weights must equal 1 (or 100%)
-ex: If we create a Category with 3 Characteristics; Char1: 0.3, Char2: 0.3, Char3: 0.4 == 1
-Currently, this isn't enforced.
-
-
 ### Edit current JSON file in any editor of your choosing
 `vim emvPresets.json`
 

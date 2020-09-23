@@ -2,6 +2,9 @@
 
 <!-- Last Updated 11/29/2018 -->
 
+![](/Volumes/SITHLORD/emv/Screenshot from 2018-11-16 07-16-21.png)
+
+
 
 There are a large number of potential exploits, malware, and vulnerabilities (EMV) that can be used to attack control systems on critical infrastructure.  Exploits and malware represent the offense aspects and vulnerabilities represent the maintenance aspects of the challenge. Successfully protecting a control system against these attacks requires a structured process for identifying, evaluating, prioritizing, and addressing
 EMVs. EMV Scoring is needed since other scoring methodologies do not include: Exploits and Malware; applicability to a specific configuration; defense capabilities; consequence; or other adversary factors. A benefit of processing through the EMV Scoring process is the identification of potential threat object characteristics that can be used for automated response.
@@ -26,8 +29,8 @@ Select an operating system for installation instructions. Newer versions may be 
 
 Open a terminal and run the following commands to update the system and install dependencies:
 ```
-sudo apt update
-sudo apt upgrade
+sudo apt install update
+sudo apt install upgrade
 sudo apt install curl build-essential checkinstall libssl-dev git
 ```
 #### Install nvm
@@ -39,9 +42,9 @@ Install nvm repository using the following:
 Close and re-open the terminal. Run the following command to view available nvm versions:
 `nvm ls-remote`
 
-Install the latest version of node (14.3.0 was the latest at the time of this writing):
+Install the latest LTS version by running the following (8.12.0 was the latest at the time of this writing):
 
-`nvm install 14.3.0`
+`nvm install 8.12.0`
 
 #### Install yarn
 
@@ -57,36 +60,76 @@ sudo apt update && sudo apt install yarn
 
 #### Install Java
 
-Install Java for OrientDB (11.0.7 at the time of this reading):
+Add the oracle java 8 repository. In a terminal, issue the following commands:
 
 ```
-sudo apt install default-jre
+sudo add-apt-repository ppa:webupd8team/java
+sudo apt update
 ```
+
+Install the java8-installer.
+
+`sudo apt install oracle-java8-installer`
+
+Check the java version to verify that Java 1.8 is installed:
+
+`java -version`
+
+Configure the java environment.
+
+`update-alternatives --config java`
+
+Create a java profile 'java.sh' in the /etc/profile.d/ directory.
+
+`sudo nano /etc/profile.d/java.sh`
+
+Enter the following for java.sh:
+```sh
+#Setting JAVA_HOME in PATH
+JAVA_HOME="/usr/lib/jvm/java-8-oracle"
+export JAVA_HOME
+PATH=$PATH:$JAVA_HOME
+export PATH
+```
+
+Press `ctrl-x` to exit, press `y` to save the changes.
+
+Make the java.sh file executable.
+
+```
+sudo chmod +x /etc/profile.d/java.sh
+source /etc/profile.d/java.sh
+```
+
+Check the java environment to verify the PATH setting.
+
+`echo $JAVA_HOME`
+
+You should see `/usr/lib/jvm/java-8-oracle`
 
 #### Install OrientDB and Configure as a Service
 
-
-The CIS Application has been tested using OrientDB v3.0.31. New versions may be available, but have not been tested. Download version 3.0.31 by issuing the following command in a terminal window.
+The CIS Application has been tested using OrientDB v2.2.20. New versions may be available, but have not been tested. Download version 2.2.20 by issuing the following command in a terminal window.
 ```
-wget https://s3.us-east-2.amazonaws.com/orientdb3/releases/3.0.31/orientdb-3.0.31.tar.gz -O orientdb-community-3.0.31.tar.gz
+wget -O orientdb-community-2.2.20.tar.gz http://orientdb.com/download.php?file=orientdb-community-2.2.20.tar.gz&os=linux
 ```
 
 Navigate to the tar file and extract the files. This assumes the downloaded file is in the Downloads folder. In a terminal:
 
 ```
 cd ~/Downloads
-tar -zxvf orientdb-community-3.0.31.tar.gz
+tar -zxvf orientdb-community-2.2.20.tar.gz
 ```
 
 Move the extracted files to the /opt directory.
-`sudo mv ~/orientdb-community-3.2.31 /opt/orientdb`
+`sudo mv ~/orientdb-community-2.2.20 /opt/orientdb`
 
 Start the OrientDB server.
 ```
 cd /opt/orientdb
 sudo bin/server.sh
 ```
-You will be prompted to create a password for the root user. Use "OrientPW". If you chose something else previously, then modify line 205 in the following file: src/app.tsx
+You will be prompted to create a password for the root user. Use "OrientPW". ==need instructions for selecting different password==
 
 Configure OrientDB to run as a Service. Open a new terminal window and issue the command:
 
@@ -134,9 +177,14 @@ Enable the service to start on boot
 
 #### Extract EMV Application files
 
-Download EMV from git:
-`git clone http://134.20.14.19/ces21/emv.git`
+Download the EMV.tar.gz archive to your machine. ==Need to update with actual link to download file==
 
+Navigate to the tar file and extract the files. This assumes the downloaded file is in the Downloads folder. In a terminal:
+
+```
+cd ~/Downloads
+tar -zxvf EMV.tar.gz
+```
 
 Navigate to the EMV folder, run the following:
 ```shell

@@ -4,6 +4,7 @@ Copyright 2020 Southern California Edison Company
 ALL RIGHTS RESERVED
 */
 
+/*Libraries*/
 import * as React from 'react';
 import {vulnOptions} from '../db/mockAPI';
 import Select, { components } from 'react-select';
@@ -17,6 +18,12 @@ const Placeholder = (props) => {
 
 const searchStyle = { width: 200, margin: '0 auto 10px' };
 
+/*
+  Search functionality that is in a semi-broken state
+  Not currently used, leaving for future
+  TODO: Finish implementing.  The idea was to have a search to external websites and reference points so one can from within the application
+  Search Google or other online resources for what they want to reference.
+*/
 export default class SearchBars extends React.Component {
   constructor(props, context) {
     super(props, context);

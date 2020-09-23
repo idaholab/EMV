@@ -5,9 +5,14 @@ Copyright 2020 Southern California Edison Company
 ALL RIGHTS RESERVED
 */
 
+/*Libraries*/
 import * as React from 'react';
 import { Table, Modal, ModalHeader, ModalBody, ModalFooter, ModalTitle, ControlLabel, FormControl , FormGroup, FieldGroup, HelpBlock} from 'react-bootstrap';
 
+/*
+  Functionality to create hardware configurations
+  TODO: Save/Display Images
+*/
 class ConfigurationEditor extends React.Component {
     constructor(props) {
         super(props);
@@ -174,7 +179,7 @@ class ConfigurationEditor extends React.Component {
 
       return (
         <div>
-            <div class='back-btn-container'>
+            <div className='back-btn-container'>
                 <button onClick={this.props.backButton}>Back</button>
             </div>
             <div className='page-title'>
@@ -233,9 +238,9 @@ class ConfigurationEditor extends React.Component {
                     </form>
                 </ModalBody>
                 <ModalFooter>
-                    <span class='form-error-msg'>{this.state.errorMsg}</span>
+                    <span className='form-error-msg'>{this.state.errorMsg}</span>
                     <button onClick={this.handleCreateConfig}>Create Configuration</button>
-                    <button class='btn-red' onClick={this.toggleCreate}>Cancel</button>
+                    <button className='btn-red' onClick={this.toggleCreate}>Cancel</button>
                 </ModalFooter>
             </Modal>
         </div>

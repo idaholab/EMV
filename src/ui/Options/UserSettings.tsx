@@ -4,10 +4,15 @@ Copyright 2020 Southern California Edison Company
 ALL RIGHTS RESERVED
 */
 
+/*Libraries*/
 import * as React from 'react';
 import * as CryptoJS from 'crypto-js';
 import { Button, ControlLabel, FormControl , FormGroup} from 'react-bootstrap';
 
+/*
+  Functionality to manage user settings
+  In this case, the only 'setting' that can be managed is changing the user's password
+*/
 class UserSettings extends React.Component {
     constructor(props) {
         super(props);
@@ -75,7 +80,7 @@ class UserSettings extends React.Component {
     private render() {
         return (
             <div>
-                <div class='back-btn-container'>
+                <div className='back-btn-container'>
                     <button onClick={this.props.backButton}>Back</button>
                 </div>
                 <div className='Login'>
@@ -105,7 +110,7 @@ class UserSettings extends React.Component {
                                 onChange={this.handleChange}
                             />
                         </FormGroup>
-                        <span class='form-error-msg'>{this.state.errorMsg}</span>
+                        <span className='form-error-msg'>{this.state.errorMsg}</span>
                         <Button
                             block={true}
                             bsSize='large'

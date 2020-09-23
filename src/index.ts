@@ -4,6 +4,7 @@ Copyright 2020 Southern California Edison Company
 ALL RIGHTS RESERVED
 */
 
+/*Libraries*/
 import style from 'bootstrap';
 import { app, BrowserWindow } from 'electron';
 import installExtension, { REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
@@ -33,7 +34,8 @@ const createWindow = async () => {
     minWidth: 800,
     webPreferences: {
       // should disable nodeIntegration, but something with tsconfig and commonjs doesn't allow for this.
-      nodeIntegrationWorker: false,
+      nodeIntegration: true,
+      // nodeIntegrationWorker: false,
       preload: './ui/preload.ts'
     }
     // icon: __dirname + './static/icons/png/64x64.png'
@@ -42,6 +44,10 @@ const createWindow = async () => {
 
   // and load the index.html of the app.
   mainWindow.loadURL(`file://${__dirname}/index.html`);
+
+
+  mainWindow.webContents.openDevTools();
+
 
   // Open the DevTools.
   if (isDevMode) {

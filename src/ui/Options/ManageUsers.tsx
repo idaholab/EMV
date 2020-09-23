@@ -4,10 +4,14 @@ Copyright 2020 Southern California Edison Company
 ALL RIGHTS RESERVED
 */
 
+/*Libraries*/
 import * as React from 'react';
 import * as CryptoJS from 'crypto-js';
 import { Table, Modal, ModalHeader, ModalBody, ModalFooter, ModalTitle, ControlLabel, FormControl , FormGroup} from 'react-bootstrap';
 
+/*
+  Functionality to manage users (add/edit/delete) and their permissions within the application.
+*/
 class ManageUsers extends React.Component {
     constructor(props) {
         super(props);
@@ -202,8 +206,8 @@ class ManageUsers extends React.Component {
                             <td style={tdStyle}>{user.name}</td>
                             <td style={tdStyle}>{user.role}</td>
                             <td style={tdStyle}>'Add CIS Info'</td>
-                            <td style={tdStyle}><button class='btn-disabled'>Edit</button></td>
-                            <td style={tdStyle}><button class='btn-disabled'>Delete</button></td>
+                            <td style={tdStyle}><button className='btn-disabled'>Edit</button></td>
+                            <td style={tdStyle}><button className='btn-disabled'>Delete</button></td>
                         </tr>;
             } else {
                 return  <tr key={uIndex} id={user['@rid']}>
@@ -212,14 +216,14 @@ class ManageUsers extends React.Component {
                             <td style={tdStyle}>{user.role}</td>
                             <td style={tdStyle}>'Add CIS Info'</td>
                             <td style={tdStyle}><button onClick={this.toggleEdit}>Edit</button></td>
-                            <td style={tdStyle}><button class='btn-red' onClick={this.toggleDelete}>Delete</button></td>
+                            <td style={tdStyle}><button className='btn-red' onClick={this.toggleDelete}>Delete</button></td>
                         </tr>;
             }
         });
 
         return (
             <div>
-                <div class='back-btn-container'>
+                <div className='back-btn-container'>
                     <button onClick={this.props.backButton}>Back</button>
                 </div>
                 <div className='page-title'>
@@ -292,9 +296,9 @@ class ManageUsers extends React.Component {
                         </form>
                     </ModalBody>
                     <ModalFooter>
-                        <span class='form-error-msg'>{this.state.errorMsg}</span>
+                        <span className='form-error-msg'>{this.state.errorMsg}</span>
                         <button onClick={this.handleCreateUser}>Create User</button>
-                        <button class='btn-red' onClick={this.toggleCreate}>Cancel</button>
+                        <button className='btn-red' onClick={this.toggleCreate}>Cancel</button>
                     </ModalFooter>
                 </Modal>
                 <Modal show={this.state.modalEditUser}>
@@ -317,9 +321,9 @@ class ManageUsers extends React.Component {
                         </form>
                     </ModalBody>
                     <ModalFooter>
-                        <span class='form-error-msg'>{this.state.errorMsg}</span>
+                        <span className='form-error-msg'>{this.state.errorMsg}</span>
                         <button onClick={this.handleEditUser}>Save Changes</button>
-                        <button class='btn-red' onClick={this.toggleEdit}>Cancel</button>
+                        <button className='btn-red' onClick={this.toggleEdit}>Cancel</button>
                     </ModalFooter>
                 </Modal>
                 <Modal show={this.state.modalDeleteUser}>
@@ -328,7 +332,7 @@ class ManageUsers extends React.Component {
                     </ModalHeader>
                     <ModalFooter>
                         <button onClick={this.handleDeleteUser}>Yes</button>
-                        <button class='btn-red' onClick={this.toggleDelete}>Cancel</button>
+                        <button className='btn-red' onClick={this.toggleDelete}>Cancel</button>
                     </ModalFooter>
                 </Modal>
             </div>

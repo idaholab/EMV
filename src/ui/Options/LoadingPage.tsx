@@ -4,8 +4,12 @@ Copyright 2020 Southern California Edison Company
 ALL RIGHTS RESERVED
 */
 
+/*Libraries*/
 import * as React from 'react';
 
+/*
+  Simple loading page with a loading indicator
+*/
 class LoadingPage extends React.Component {
   constructor(props) {
     super(props);

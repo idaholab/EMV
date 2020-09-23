@@ -4,17 +4,23 @@ Copyright 2020 Southern California Edison Company
 ALL RIGHTS RESERVED
 */
 
+/*Libraries*/
 import * as React from 'react';
 import {Table, FormGroup, Button, ButtonToolbar, ControlLabel, FormControl, Label, Col, Form, Row, Grid} from 'react-bootstrap';
-import handleClearClick from './Scoring/ScoringView';
 import { VictoryPie, VictoryStack, VictoryBar, VictoryScatter, VictoryTooltip } from 'victory';
-
-let select = '';
+/*Custom*/
+import handleClearClick from './Scoring/ScoringView';
+/*Style*/
 const tdStyle = {
     verticalAlign: 'middle'
 };
-/*TODO: Move this to score & track state there. Otherwise, make a call to the criteria set to populate description lists*/
+let select = '';
 
+/*
+  Manages InfoSection which is the pane to the right of the Scoring tab
+  Included here is the piegraph, name/config/ticket # and graphics for Category Scores and Category Scores x Applicability
+  TODO: Move this to score & track state there. Otherwise, make a call to the criteria set to populate description lists
+*/
 export default class InfoSection extends React.Component {
   constructor(props, context) {
     super(props, context);
@@ -37,7 +43,6 @@ export default class InfoSection extends React.Component {
 
   private async componentDidUpdate(prevProps) {
     if (this.props.updateInfo !== prevProps.updateInfo || this.props.currentCIS !== prevProps.currentCIS) {
-      // console.log('updating component infosection');
       this.updateComponent();
     }
   }
@@ -53,7 +58,6 @@ export default class InfoSection extends React.Component {
 
     for (const qCat of queryCategories.in) {
         const curCat = await (db.select().from(qCat.toString()).one());
-        // console.log('curCat'curCat);
         catArr[catindex] = {...catArr[catindex], name: curCat.name, categoryID: curCat['@rid'], total: curCat['total_score'], characteristics: []};
         catindex++;
     }
@@ -71,7 +75,6 @@ export default class InfoSection extends React.Component {
         select = '';
       } else {
           select = this.state.catArray.map((category, i) => {
-            // console.log('Category Total InfoSection', category.total);
             if (category.name !== 'Applicability' && category.total !== 0) {
                 const retLabel = category.name + ' | ' + category.total;
                 return {y: category.total, x: category.total, label: retLabel};
@@ -84,7 +87,6 @@ export default class InfoSection extends React.Component {
     }
   }
 
-  //status either progress or finished.  Might want to change to boolean (true/false)
   private handleSubmit = async (event) => {
 
     event.preventDefault();
@@ -94,7 +96,6 @@ export default class InfoSection extends React.Component {
       .set({
         status: 'finished'
       }).one();
-    // console.log(queryCategories);
   }
 
 private  getCatScore = () => {
@@ -135,7 +136,6 @@ private  getCatScore = () => {
 
   private getConfig = (configuration) => {
     try {
-      // console.log('here', configuration);
       let con = null;
       if (configuration !== this.state.configuration['@rid'].toString()) {
         console.log('configuration rids dont match');
@@ -146,7 +146,7 @@ private  getCatScore = () => {
       }
       return con;
     } catch (error) {
-      // console.log('getConfig in InfoSection', error);
+      console.log('getConfig in InfoSection', error);
     }
   }
 
@@ -160,9 +160,6 @@ private  getCatScore = () => {
     const dataSet = this.getDataSet();
     const CatScores = this.getCatScore();
     const CatAppScores = this.getCatAppScore();
-
-    // console.log('currentCIS', this.props.currentCIS);
-    // console.log(dataSet);
 
     const catList = CatScores.map((cat, cIndex) => {
         return  <tr key={cIndex}>

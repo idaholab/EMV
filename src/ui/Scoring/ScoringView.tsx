@@ -8,18 +8,22 @@ ALL RIGHTS RESERVED
 import * as React from 'react';
 import ReactDOM from 'reactdom';
 import Select from 'react-select';
-import * as SplitPane from 'react-split-pane';
+import SplitPane from 'react-split-pane'
 import style from 'bootstrap';
-import emvPresets from '../../db/emvPresets'; //Instead of this, fetch
 import * as ReactBootstrap from 'react-bootstrap';
 import { Nav, NavItem, Tab, Label, Grid, Table, Button, FormGroup, FormControl, ControlLabel, Form, InputGroup, Grid, Row, Col, ButtonToolbar, DropdownButton, MenuItem } from 'react-bootstrap';
+/*Custom*/
 import {updateJsonRep} from './ScoringFuncs';
 import InfoSection from './InfoSection';
-
+import emvPresets from '../../db/emvPresets';
+/*Style*/
 const tdStyle = {
   border: 'none',
 };
 
+/*
+  Handles functionality for all things scoring within the application
+*/
 class ScoringView extends React.Component {
   constructor(props, context) {
     super(props, context);
@@ -44,13 +48,11 @@ class ScoringView extends React.Component {
     this.setState({cis: this.props.currentCIS});
   }
 
-  //attempting to make InfoSection update from here
   private setInfoSection = async (selected) => {
-    // await this.updateComponent();
     this.setState({infoSectionUpdate: selected});
   }
 
-  private render() {
+  public render() {
     if (!this.props.currentCIS) {
         return (
             <div> Please Select a CIS</div>
@@ -203,6 +205,7 @@ class CategoryArray extends React.Component {
 
     }
 
+    // TODO: dynamically adjust memoHeight based on size of text inside box.
     // rows = {Math.round(this.state.memoHeight)/10}
 
     private handleNewChange = async (event) => {
@@ -225,7 +228,7 @@ class CategoryArray extends React.Component {
                 this.state.catArray.map((category, i) => {
                   const x = 'test' + i;
                     return (
-                      <NavItem className={x} eventKey= {i} > {category.name}</NavItem>
+                      <NavItem className={x} eventKey= {i} key = {i}> {category.name}</NavItem>
                     );
                 })
               }
@@ -239,7 +242,7 @@ class CategoryArray extends React.Component {
                 {
                 this.state.catArray.map((category, i) => {
                   return(
-                    <Tab.Pane eventKey={i}>
+                    <Tab.Pane eventKey={i} key = {i}>
                       <Table>
                         <thead className='charactistics-list-header'>
                           <tr>
@@ -259,7 +262,7 @@ class CategoryArray extends React.Component {
                                 id='memo_field'
                                 componentClass='textarea'
                                 placeholder= 'Score Reasoning'
-                                value = {this.state.value}
+                                value = {this.state.value || ''}
                                 onFocus = {this.handleFocus}
                                 onChange = {this.handleNewChange}
                                 onBlur = {this.handleBlur}
@@ -348,7 +351,7 @@ class CategoryArray extends React.Component {
         return (
           this.state.charArray.map((characteristic, i) => {
             return(
-              <div className = 'characteristics-table-container'>
+              <div className = 'characteristics-table-container' key={i}>
                 <div className = 'characteristics-table-tableflex'>
                   <Table style={{backgroundColor: '#4C4F5A'}} className='characteristics-list'>
                     <thead className='charactistics-section-list-header'>
@@ -495,9 +498,9 @@ class CategoryArray extends React.Component {
                   scoreindex++;
               }
               // Tempfix if clearScore is still false after looping through the given score array, then we set selectedOption to null
-              if (clearScore === false) {
-                this.setState({selectedOption: {value: null, label: 'Select...'}});
-              }
+              // if (clearScore === false) {
+              //   this.setState({selectedOption: {value: null, label: 'Select...'}});
+              // }
               this.setState({scoreArray: scoreArr});
             }
 
@@ -537,7 +540,7 @@ class CategoryArray extends React.Component {
             console.log('Option Selected', selectedOption);
             this.setState({ selectedOption: selectedOption});
             await this.updateScore(selectedOption);
-            await this.props.callBackToAttributeScore({selectedOption}); //callback function of score
+            await this.props.callBackToAttributeScore({selectedOption});
           }
 
           private render() {

@@ -202,7 +202,7 @@ export class App extends React.Component {
     public getOrientConnections = async function() {
         const serverOptions = {
             host: 'localhost',
-            password: 'admin',
+            password: 'OrientPW',
             port: '2424',
             username: 'root',
             rejectUnauthorized: false
@@ -417,7 +417,7 @@ export class App extends React.Component {
                     </ModalBody>
                     <ModalFooter>
                         <button onClick={() => this.state.chooseCisButtonFunc(this)}>{this.state.chooseCisButtonText}</button>
-                        <button class='btn-red' onClick={this.toggleExportCIS}>Cancel</button>
+                        <button className='btn-red' onClick={this.toggleExportCIS}>Cancel</button>
                     </ModalFooter>
                 </Modal>
             </div>
