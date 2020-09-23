@@ -2,10 +2,6 @@
 
 <!-- Last Updated 11/29/2018 -->
 
-![](/Volumes/SITHLORD/emv/Screenshot from 2018-11-16 07-16-21.png)
-
-
-
 There are a large number of potential exploits, malware, and vulnerabilities (EMV) that can be used to attack control systems on critical infrastructure.  Exploits and malware represent the offense aspects and vulnerabilities represent the maintenance aspects of the challenge. Successfully protecting a control system against these attacks requires a structured process for identifying, evaluating, prioritizing, and addressing
 EMVs. EMV Scoring is needed since other scoring methodologies do not include: Exploits and Malware; applicability to a specific configuration; defense capabilities; consequence; or other adversary factors. A benefit of processing through the EMV Scoring process is the identification of potential threat object characteristics that can be used for automated response.
 
