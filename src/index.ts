@@ -1,25 +1,18 @@
-/*
-Copyright 2020 Southern California Edison Company
-
-ALL RIGHTS RESERVED
-*/
-
-/*Libraries*/
-import style from 'bootstrap';
 import { app, BrowserWindow } from 'electron';
-import installExtension, { REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
-import { enableLiveReload } from 'electron-compile';
-import * as path from 'path';
+declare var MAIN_WINDOW_WEBPACK_ENTRY: any;
 import * as config_menu from './ui/appMenu/mainMenu';
+import * as path from 'path';
+
+
+// Handle creating/removing shortcuts on Windows when installing/uninstalling.
+if (require('electron-squirrel-startup')) {
+  // eslint-disable-line global-require
+  app.quit();
+}
+
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
-let mainWindow: Electron.BrowserWindow | null = null;
-
-const isDevMode = process.execPath.match(/[\\/]electron/);
-
-if (isDevMode) {
-  enableLiveReload({strategy: 'react-hmr'});
-}
+let mainWindow: any;
 
 //Load menu from template
 config_menu.setup();
@@ -34,34 +27,25 @@ const createWindow = async () => {
     minWidth: 800,
     webPreferences: {
       // should disable nodeIntegration, but something with tsconfig and commonjs doesn't allow for this.
+      // nodeIntegrationInWorker: true,
+      worldSafeExecuteJavaScript: true,
       nodeIntegration: true,
-      // nodeIntegrationWorker: false,
       preload: './ui/preload.ts'
+
     }
-    // icon: __dirname + './static/icons/png/64x64.png'
-    // icon: path.join(__dirname, './static/icons/png/64x64.png'),
   });
 
   // and load the index.html of the app.
-  mainWindow.loadURL(`file://${__dirname}/index.html`);
-
-
-  mainWindow.webContents.openDevTools();
-
+  mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
 
   // Open the DevTools.
-  if (isDevMode) {
-    await installExtension(REACT_DEVELOPER_TOOLS);
-    mainWindow.webContents.openDevTools();
-  }
+  mainWindow.webContents.openDevTools();
 
   // Emitted when the window is closed.
   mainWindow.on('closed', () => {
     // Dereference the window object, usually you would store windows
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
-    //console.log('Closing Database:', db.name);
-    //server.close();
     mainWindow = null;
   });
 };

@@ -4,10 +4,8 @@ Copyright 2020 Southern California Edison Company
 ALL RIGHTS RESERVED
 */
 
-/*Libraries*/
 import * as React from 'react';
 
-/*Handles the admin dropdown list*/
 export default class UserPortal extends React.Component {
 
     constructor(props) {
@@ -19,8 +17,8 @@ export default class UserPortal extends React.Component {
             return (
                 <div id='btn-userportal'>
                     <span><strong>{this.props.uname}</strong></span>
-                    <span className='down-arrow'><strong>&#x25BE;</strong></span>
-                    <div className='dropdown-content'>
+                    <span class='down-arrow'><strong>&#x25BE;</strong></span>
+                    <div class='dropdown-content'>
                         <ul>
                             <li onClick={this.props.uportal}>Manage Users</li>
                             <li onClick={this.props.uportal}>Criteria Set Editor</li>
@@ -34,8 +32,8 @@ export default class UserPortal extends React.Component {
             return (
                 <div id='btn-userportal'>
                     <span><strong>{this.props.uname}</strong></span>
-                    <span className='down-arrow'><strong>&#x25BE;</strong></span>
-                    <div className='dropdown-content'>
+                    <span class='down-arrow'><strong>&#x25BE;</strong></span>
+                    <div class='dropdown-content'>
                         <ul>
                             <li onClick={this.props.uportal}>Change Password</li>
                         </ul>

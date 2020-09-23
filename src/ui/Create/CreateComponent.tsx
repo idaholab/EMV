@@ -4,14 +4,9 @@ Copyright 2020 Southern California Edison Company
 ALL RIGHTS RESERVED
 */
 
-/*Libraries*/
 import * as React from 'react';
-/*Custom*/
 import CreateCIS from './CreateCIS';
 
-/*
-  Create tab component handler
-*/
 class CreateComponent extends React.Component {
 
   public render() {

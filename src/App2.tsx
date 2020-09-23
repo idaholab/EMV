@@ -25,9 +25,30 @@ import {connectToServer, connectToDatabase} from './db/dbtest';
 // export default class App extends React.Component {
 //     render(return)
 // }
-export default class App extends React.Component {
-    constructor() {
-        super();
+type myProps ={}
+type myState ={ loadingPage: boolean,
+                loginPage: boolean,
+                mainPage: boolean,
+                userSettingsPage: boolean,
+                criteriaEditorPage: boolean,
+                configurationEditorPage: boolean,
+                manageUsersPage: boolean,
+                username: string,
+                password: string,
+                userObject: any,
+                errorMsg: string,
+                server: any,
+                modalExportCIS: boolean,
+                exportCisList: any,
+                pickedCisExport: string,
+                chooseCisTitle: string,
+                chooseCisButton: string,
+                chooseCisButtonText: string,
+                chooseCisButtonFunc: any,
+                database: any}
+export default class App extends React.Component<myProps, myState> {
+    constructor(props: any) {
+        super(props);
         this.state = {
             loadingPage: true,
             loginPage: false,
@@ -47,6 +68,8 @@ export default class App extends React.Component {
             pickedCisExport: '',
             chooseCisTitle: '',
             chooseCisButton: '',
+            chooseCisButtonText: '',
+            chooseCisButtonFunc: null
         };
 
         this.handleLogout = this.handleLogout.bind(this);
@@ -54,7 +77,7 @@ export default class App extends React.Component {
         this.handleSelectFromUserPortal = this.handleSelectFromUserPortal.bind(this);
     }
 
-    protected componentDidMount() {
+    public componentDidMount() {
         const self = this;
         this.getOrientConnections()
         .then(function() {
@@ -94,14 +117,14 @@ export default class App extends React.Component {
         });
     }
 
-    private handleChange = (event) => {
+    private handleChange = (event:any) => {
         this.setState({
-            [event.target.id]: event.target.value,
+            ...this.state, [event.target.id]: event.target.value,
         });
     }
 
     //TODO: make sure session is killed
-    private handleLogout = (event) => {
+    private handleLogout = (event:any) => {
         this.setState({
             loginPage: true,
             mainPage: false,
@@ -113,7 +136,7 @@ export default class App extends React.Component {
         });
     }
 
-    private handleBack = (event) => {
+    private handleBack = (event:any) => {
         this.setState({
             mainPage: true,
             loginPage: false,
@@ -124,7 +147,7 @@ export default class App extends React.Component {
         });
     }
 
-    private handleSelectFromUserPortal = (event) => {
+    private handleSelectFromUserPortal = (event:any) => {
 
         switch (event.target.innerHTML) {
             case 'Manage Users':
@@ -173,8 +196,8 @@ export default class App extends React.Component {
         }
     }
 
-    private handleSubmit = (event) => {
-        self = this;
+    private handleSubmit = (event:any) => {
+        let self: any = this;
         event.preventDefault();
         const queryOptions = {
             name: this.state.username,
@@ -184,7 +207,7 @@ export default class App extends React.Component {
         const queryResults = this.state.database.select().from('User')
         .where(queryOptions).one()
         .then(
-            function(result) {
+            function(result:any) {
                 if (typeof result !== 'undefined') {
                     self.setState({
                         loginPage: false,
@@ -201,7 +224,7 @@ export default class App extends React.Component {
         );
     }
 
-    public getOrientConnections = async function() {
+    public getOrientConnections = async function(this: any) {
         const serverOptions = {
             host: 'localhost',
             password: 'OrientPW',
@@ -221,9 +244,10 @@ export default class App extends React.Component {
         this.setState({server: server, database: db});
     };
 
-    public exportCIS = async function(self) {
+    public exportCIS = async function(self:any) {
         const jsonRepObject = JSON.parse(self.state.pickedCisExport);
-        const filename = await remote.dialog.showSaveDialog({title: 'Export CIS as JSON', defaultPath: jsonRepObject.name + '_cis.json'});
+        let filename: any;
+        filename = await remote.dialog.showSaveDialog({title: 'Export CIS as JSON', defaultPath: jsonRepObject.name + '_cis.json'});
         if (filename) {
             //console.log(filename);
             writeFile(filename, self.state.pickedCisExport, (err) => {
@@ -235,24 +259,26 @@ export default class App extends React.Component {
         });
     };
 
-    public toggleExportCIS = (event) => {
+    public toggleExportCIS = (event:any) => {
         this.setState({
             modalExportCIS: !this.state.modalExportCIS
         });
     }
 
-    public exportSTIX = async function(self) {
+    public exportSTIX = async function(self:any) {
         const jsonRepObject = JSON.parse(self.state.pickedCisExport);
         const filename = await remote.dialog.showSaveDialog({title: 'Create STIX from CIS', defaultPath: jsonRepObject.name + '_stix_bundle.json'});
         if (filename) {
             // console.log(filename);
+            let type2: string;
             const stixData = {
                 type: 'bundle',
                 id: 'bundle--' + uuid.v4(),
                 spec_version: '2.0',
                 objects: []
             };
-
+            
+            type2 = 'course-of-action';
             stixData.objects.push({
                 type: 'course-of-action',
                 id: 'course-of-action--' + uuid.v4(),
@@ -388,42 +414,42 @@ export default class App extends React.Component {
     };
 
     public render() {
+        return ( <div>Testing</div>)
+        // const cisDropdown = this.state.exportCisList.map((cis, cIndex) => {
+        //     return <option key={cIndex} value={cis.jsonRep}>{cis.name}</option>;
+        // });
 
-        const cisDropdown = this.state.exportCisList.map((cis, cIndex) => {
-            return <option key={cIndex} value={cis.jsonRep}>{cis.name}</option>;
-        });
-
-        return (
-            <div className = 'Wrapper'>
-                {/* <Header /> */}
-                { this.state.loadingPage && <LoadingPage msg='Preparing Database'/>}
-                { this.state.loginPage && <LoginPortal uname={this.state.username} passwd={this.state.password} errorMsg={this.state.errorMsg} handleChange={this.handleChange} handleSubmit={this.handleSubmit}/> }
-                { this.state.mainPage && <Main uname={this.state.username} urole={this.state.userObject.role} uid={this.state.userObject['@rid'].toString()}db={this.state.database} logout={this.handleLogout} uportal={this.handleSelectFromUserPortal}/> }
-                { this.state.userSettingsPage && <UserSettings uname={this.state.username} db={this.state.database} logout={this.handleLogout} backButton={this.handleBack}/> }
-                { this.state.manageUsersPage && <ManageUsers db={this.state.database} logout={this.handleLogout} backButton={this.handleBack}/> }
-                { this.state.criteriaEditorPage && <CriteriaEditor uname= {this.state.username} db={this.state.database} logout={this.handleLogout} backButton={this.handleBack}/>}
-                { this.state.configurationEditorPage && <ConfigurationEditor uname= {this.state.username} db={this.state.database} logout={this.handleLogout} backButton={this.handleBack}/>}
-                <Modal show={this.state.modalExportCIS}>
-                    <ModalHeader>
-                        <ModalTitle componentClass='h2'>{this.state.chooseCisTitle}</ModalTitle>
-                    </ModalHeader>
-                    <ModalBody>
-                        <form>
-                            <FormGroup controlId='pickedCisExport'>
-                                <FormControl componentClass='select' onChange={this.handleChange}>
-                                    <option value='' disabled selected hidden>Choose CIS...</option>
-                                    {cisDropdown}
-                                </FormControl>
-                            </FormGroup>
-                        </form>
-                    </ModalBody>
-                    <ModalFooter>
-                        <button onClick={() => this.state.chooseCisButtonFunc(this)}>{this.state.chooseCisButtonText}</button>
-                        <button className='btn-red' onClick={this.toggleExportCIS}>Cancel</button>
-                    </ModalFooter>
-                </Modal>
-            </div>
-        );
+        // return (
+        //     <div className = 'Wrapper'>
+        //         {/* <Header /> */}
+        //         { this.state.loadingPage && <LoadingPage msg='Preparing Database'/>}
+        //         { this.state.loginPage && <LoginPortal uname={this.state.username} passwd={this.state.password} errorMsg={this.state.errorMsg} handleChange={this.handleChange} handleSubmit={this.handleSubmit}/> }
+        //         { this.state.mainPage && <Main uname={this.state.username} urole={this.state.userObject.role} uid={this.state.userObject['@rid'].toString()}db={this.state.database} logout={this.handleLogout} uportal={this.handleSelectFromUserPortal}/> }
+        //         { this.state.userSettingsPage && <UserSettings uname={this.state.username} db={this.state.database} logout={this.handleLogout} backButton={this.handleBack}/> }
+        //         { this.state.manageUsersPage && <ManageUsers db={this.state.database} logout={this.handleLogout} backButton={this.handleBack}/> }
+        //         { this.state.criteriaEditorPage && <CriteriaEditor uname= {this.state.username} db={this.state.database} logout={this.handleLogout} backButton={this.handleBack}/>}
+        //         { this.state.configurationEditorPage && <ConfigurationEditor uname= {this.state.username} db={this.state.database} logout={this.handleLogout} backButton={this.handleBack}/>}
+        //         <Modal show={this.state.modalExportCIS}>
+        //             <ModalHeader>
+        //                 <ModalTitle componentClass='h2'>{this.state.chooseCisTitle}</ModalTitle>
+        //             </ModalHeader>
+        //             <ModalBody>
+        //                 <form>
+        //                     <FormGroup controlId='pickedCisExport'>
+        //                         <FormControl componentClass='select' onChange={this.handleChange}>
+        //                             <option value='' disabled selected hidden>Choose CIS...</option>
+        //                             {cisDropdown}
+        //                         </FormControl>
+        //                     </FormGroup>
+        //                 </form>
+        //             </ModalBody>
+        //             <ModalFooter>
+        //                 <button onClick={() => this.state.chooseCisButtonFunc(this)}>{this.state.chooseCisButtonText}</button>
+        //                 <button className='btn-red' onClick={this.toggleExportCIS}>Cancel</button>
+        //             </ModalFooter>
+        //         </Modal>
+        //     </div>
+        // );
 
   }
 }

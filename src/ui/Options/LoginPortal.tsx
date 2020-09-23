@@ -4,14 +4,10 @@ Copyright 2020 Southern California Edison Company
 ALL RIGHTS RESERVED
 */
 
-/*Libraries*/
 import * as React from 'react';
 import { Button, ControlLabel, FormControl , FormGroup} from 'react-bootstrap';
-
-/*
-  Login Portal using OrientDB OUser System class for users
-  Tracks user state, if !logged in don't show any other components
-*/
+//Track user state, if !logged in don't show any other components
+//For now, use OrientDB OUser System class for users
 class LoginPortal extends React.Component {
   constructor(props) {
     super(props);

@@ -4,21 +4,17 @@ Copyright 2020 Southern California Edison Company
 ALL RIGHTS RESERVED
 */
 
-import * as OrientDB from 'orientjs';
+// import * as OrientDB from 'orientjs';
+import OrientDB from 'orientjs';
 import * as schema from './schema.json';
 import * as CryptoJS from 'crypto-js';
 
-/*This file manages the work the DB does when connecting to the database.
-  Creates a database of the proper schema if there isn't one passed in as an option.name.
-  TODO: timeout connection (the database connection is always open)
-  TODO: remove createConfigurations method
-  */
 export async function connectToServer(options) {
     process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'; //TODO: Fix this
     const server = await OrientDB({
        host:       options.host,
-       password:   options.password
-       port:       options.port
+       password:   options.password,
+       port:       options.port,
        username:   options.username
 
     });
@@ -60,10 +56,13 @@ async function new_database(dbName, server) {
         storage: 'plocal'
     });
 
+    // console.log('Created Database: ', newDB.name);
     //create schema
     schema.schema.forEach(async function(itemI, indexI) {
         newClass = await newDB.class.create(itemI.name, itemI.superclass);
+        // console.log('Created class: ' + newClass.name);
         newProperty = await newClass.property.create(itemI.properties);
+        // console.log('Created Property: ' + newProperty.name);
         return newProperty;
     });
 
@@ -80,19 +79,23 @@ async function createDefaultUser(db) {
         password: CryptoJS.SHA512('admin').toString(),
         role: 'admin'
     }).one();
+
+    // console.log('Created default user: ' + defUser.name);
 }
 
-//TODO: This can be deleted when admin has ability to create configurations from admin portal
+//This can be deleted when admin has ability to create configurations from admin portal
 async function createConfigurations(db) {
     const defConf = await db.create('VERTEX', 'Configuration')
     .set({
         name: 'VMAR',
         description: 'Some cool tech...'
     }).one();
+    // console.log('Created default hardware configuration: ' + defConf.name);
 
     const defConf2 = await db.create('VERTEX', 'Configuration')
     .set({
         name: 'Deathstar',
         description: "That's no moon."
     }).one();
+    // console.log('Created default hardware configuration: ' + defConf2.name);
 }

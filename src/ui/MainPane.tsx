@@ -4,28 +4,25 @@ Copyright 2020 Southern California Edison Company
 ALL RIGHTS RESERVED
 */
 
-/*Libraries*/
 import * as React from 'react';
 import {Tabs, Tab, Modal, ModalHeader, ModalBody, ModalFooter, ModalTitle, FormGroup, FormControl} from 'react-bootstrap';
-// import * as SplitPane from 'react-split-pane';
-import SplitPane from 'react-split-pane';
-import { ipcRenderer, remote } from 'electron';
-import { writeFile, readFile } from 'fs';
-import {Button} from 'react-bootstrap';
+import * as SplitPane from 'react-split-pane';
+
 /*Custom*/
 import FinishComponent from '../ui/Finish/FinishComponent';
 import CreateComponent from '../ui/Create/CreateComponent';
 import ScoringComponent from '../ui/Scoring/ScoringComponent';
 import UserPortal from '../ui/UserPortal';
+import {Button} from 'react-bootstrap';
+import { ipcRenderer, remote } from 'electron';
+import { writeFile, readFile } from 'fs';
 import { createDefault } from './Create/CreateFunctions';
-/*Style*/
+
+//creating custom style because things are broken in a couple divs TODO: Fix
 const divStyle = {
   width: '100%',
 };
 
-/*
-  This is the main driver for the application, holding all components held within.
-*/
 export default class MainPane extends React.Component {
   constructor(props, context) {
     super(props, context);
@@ -67,6 +64,7 @@ export default class MainPane extends React.Component {
 
   /*setCurrentCISID*/
   public setCurrentCIS = async function(cisObject) {
+    // console.log('setting Current CIS: ', cisObject);
     this.setState({ currentCIS: cisObject}, () => console.log('after setting Current CIS in MainPane', this.state.currentCIS));
   };
 
@@ -75,6 +73,7 @@ export default class MainPane extends React.Component {
       let newCIS = null;
       const filenames = await remote.dialog.showOpenDialog({title: 'Import CIS from JSON', filters: [{name: 'CIS', extensions: ['json', 'JSON']}]});
       if (filenames) {
+          // console.log(filenames[0]);
           readFile(filenames[0], 'utf8', (err, data) => {
               if (err) { throw err; }
               newCIS = JSON.parse(data);
@@ -156,7 +155,7 @@ export default class MainPane extends React.Component {
             </ModalBody>
             <ModalFooter>
                 <button onClick={() => this.importCIS(this)}>Import</button>
-                <button className='btn-red' onClick={this.toggleImportCIS}>Cancel</button>
+                <button class='btn-red' onClick={this.toggleImportCIS}>Cancel</button>
             </ModalFooter>
         </Modal>
       </div>

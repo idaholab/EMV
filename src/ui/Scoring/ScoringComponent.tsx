@@ -4,23 +4,17 @@ Copyright 2020 Southern California Edison Company
 ALL RIGHTS RESERVED
 */
 
-/*Libraries*/
 import * as React from 'react';
-// import * as SplitPane from 'react-split-pane';
-import SplitPane from 'react-split-pane'
-/*Custom*/
-import InfoSection from '../InfoSection';
-import ScoringList from './ScoringList';
 import ScoringView from './ScoringView';
+import * as SplitPane from 'react-split-pane';
+import ScoringList from './ScoringList';
+import InfoSection from '../InfoSection';
 import SearchBars from '../SearchBars';
-/*Style*/
+
 const divStyle = {
   height: '95%',
 };
 
-/*
-  Scoring tab component handler
-*/
 class ScoringComponent extends React.Component {
   constructor(props) {
       super(props);

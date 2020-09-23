@@ -4,13 +4,11 @@ Copyright 2020 Southern California Edison Company
 ALL RIGHTS RESERVED
 */
 
-/*Libraries*/
 import * as React from 'react';
-import SplitPane from 'react-split-pane'
-/*Custom*/
 import FinishList from './FinishList';
 import FinishView from './FinishView';
-/*Style*/
+import * as SplitPane from 'react-split-pane';
+
 const divStyle = {
   height: '95%',
 };
@@ -23,9 +21,6 @@ const borderColors = ['#CC6677', '#DDCC77', '#88CCEE', '#44AA99', '#117733', '#3
 //const borderColors = ['rgba(255,201,139,0.9)', 'rgba(114,165,218,0.9)', 'rgba(214,216,127,0.9)', 'rgba(165,216,114,0.9)', 'rgba(201,231,223,0.9)'];
 const bColorSize = 8;
 
-/*
-  Report tab component handler
-*/
 class FinishComponent extends React.Component {
 
     constructor(props) {
@@ -80,7 +75,7 @@ class FinishComponent extends React.Component {
               applicabilityNum = catObj.total_score;
           }
       }
-      //Create chart x Applicability
+      //Creat chart x Applicability
       for (const [cIndex, catObj] of currentCisJsonRepObj.criteriaDefault.entries()) {
           if (catObj.category !== 'Applicability') {
               tempChartDataApplicability.push({label: catObj.category,
@@ -113,7 +108,7 @@ class FinishComponent extends React.Component {
                 applicabilityNum = catObj.total_score;
             }
         }
-        //Create chart x Applicability
+        //Creat chart x Applicability
         for (const [cIndex, catObj] of cisJson.criteriaDefault.entries()) {
             if (catObj.category !== 'Applicability') {
                 chartDataObject.dataSetsApp[cIndex - 1].data.push((catObj.total_score * applicabilityNum).toFixed(2));
@@ -122,24 +117,22 @@ class FinishComponent extends React.Component {
         return chartDataObject;
     }
 
-    // Takes in current and list of not current
+    // takes in current and list of not current
     private createChartData = async (currentCIS) => {
-      let currentCisJsonRepObj = '';
-	    if(currentCIS !== null){
-		      currentCisJsonRepObj = JSON.parse(currentCIS.jsonRep);
-		      let chartDataObject = await this.populateInitialDataSet(currentCisJsonRepObj);
+        const currentCisJsonRepObj = JSON.parse(currentCIS.jsonRep);
+        let chartDataObject = await this.populateInitialDataSet(currentCisJsonRepObj);
 
-        	//Add extra datasets
-        	if (this.state.comparisonCisSelected.length > 0) {
-            	for (const cis of this.state.comparisonCisSelected) {
-               		 chartDataObject = await this.appendToInitialDataSet(cis, chartDataObject);
-            	}
-        	}
+        // console.log('creating chart data');
+        //Add extra datasets
+        if (this.state.comparisonCisSelected.length > 0) {
+            for (const cis of this.state.comparisonCisSelected) {
+                chartDataObject = await this.appendToInitialDataSet(cis, chartDataObject);
+            }
+        }
 
-        	this.setState({
-            		chartData: chartDataObject
-        	});
-	    }
+        this.setState({
+            chartData: chartDataObject
+        });
     }
 
     public render() {

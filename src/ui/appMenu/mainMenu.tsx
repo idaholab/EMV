@@ -105,9 +105,6 @@ const template = [
     }
 ];
 
-/*
-  Manages the menu options at the top of the appliaction
-*/
 export function setup() {
 
     if (process.platform === 'darwin') {

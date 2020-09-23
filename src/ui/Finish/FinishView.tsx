@@ -4,16 +4,14 @@ Copyright 2020 Southern California Edison Company
 ALL RIGHTS RESERVED
 */
 
-/*Libraries*/
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Tab, Nav, NavItem, Table } from 'react-bootstrap';
+
+import {catStaticData, catStaticAppData} from '../../db/mockAPI';
 import Chart from 'chart.js';
 import {Bar} from 'react-chartjs-2';
 import Select from 'react-select';
-/*Custom*/
-import {catStaticData, catStaticAppData} from '../../db/mockAPI';
-/*Style*/
 const backgroundColor = ['#ffc97f', '#72A5D8', '#D6D872', '#A5D872', '#c9e7db'];
 
 class FinishView extends React.Component {
@@ -165,7 +163,7 @@ class FinishView extends React.Component {
                                         {/* <h3>Comparison View</h3> */}
                                         <div id='chart-container'>
                                           <h4>Category Scores</h4>
-                                           <div className='report-chart'>
+                                           <div class='report-chart'>
                                               <Bar
                                                 data={dataSets}
                                                 //data={this.state.chartData}
@@ -204,7 +202,7 @@ class FinishView extends React.Component {
                                           </div>
                                           <br /> <br />
                                             <h4>Category Scores x Applicability</h4>
-                                            <div className='report-chart'>
+                                            <div class='report-chart'>
                                                 <Bar
                                                   data={dataSetsApp}
                                                   //width={100}

@@ -4,9 +4,6 @@ Copyright 2020 Southern California Edison Company
 ALL RIGHTS RESERVED
 */
 
-/*
-  Holds functions needed to create defaults from imported CIS (something that has been scored and exported)
-*/
 export async function updateUserWorkFlow(db, cisID, uid) {
     const update = await db.query(
         'UPDATE ' + uid
@@ -54,10 +51,12 @@ export async function createDefault(db, cisName, cisDescription, cisConfiguratio
             name: catObj.category,
             total_score: 0
         }).one();
-
+        // console.log('Created Category: ' + category.name);
+        //Create edge
         categoryID = category['@rid'];
         categoryOf = await db.create('EDGE', 'category_of')
         .from(categoryID).to(cisID).one();
+        // console.log(categoryOf);
 
         //Create characteristics
         for (const charObj of catObj.characteristics) {
@@ -67,10 +66,12 @@ export async function createDefault(db, cisName, cisDescription, cisConfiguratio
                 total_score: 0,
                 weight: charObj.weight
             }).one();
-
+            // console.log('Created Characteristic: ' + characteristic.name);
+            //Create edge
             characteristicID = characteristic['@rid'];
             characteristicOf = await db.create('EDGE', 'characteristic_of')
             .from(characteristicID).to('#' + categoryOf.out.cluster + ':' + categoryOf.out.position).one();
+            // console.log(characteristicOf);
 
             //Create attributes
             for (const attObj of charObj.attributes) {
@@ -81,10 +82,12 @@ export async function createDefault(db, cisName, cisDescription, cisConfiguratio
                     user_weight: 1,
                     weighted_score: 0
                 }).one();
-
+                // console.log('Created Attribute: ' + attribute.name);
+                //Create edge
                 attributeID = attribute['@rid'];
                 attributeOf = await db.create('EDGE', 'attribute_of')
                 .from(attributeID).to('#' + characteristicOf.out.cluster + ':' + characteristicOf.out.position).one();
+                // console.log(attributeOf);
 
                 //Create Score Guidances
                 for (const scoreObj of attObj.scores) {
@@ -94,10 +97,12 @@ export async function createDefault(db, cisName, cisDescription, cisConfiguratio
                         score: scoreObj.score,
                         chosen: false
                     }).one();
-
+                    // console.log('Created Score: ' + score.description);
+                    //Create edge
                     scoreID = score['@rid'];
                     scoreOf = await db.create('EDGE', 'score_guidance_of')
                     .from(scoreID).to('#' + attributeOf.out.cluster + ':' + attributeOf.out.position).one().then(
+                    // console.log(scoreOf);
                 }
             }
         }
@@ -157,6 +162,7 @@ export async function updateJsonRep(db, cisID) {
     .set({
         jsonRep: JSON.stringify(jsToJSON);
     }).one();
+    // console.log('Updated CIS JSON');
 
 }
 

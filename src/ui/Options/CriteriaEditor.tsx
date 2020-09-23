@@ -5,14 +5,9 @@ Copyright 2020 Southern California Edison Company
 ALL RIGHTS RESERVED
 */
 
-/*Libraries*/
 import * as React from 'react';
 import { Table, Modal, ModalHeader, ModalBody, ModalFooter, ModalTitle, ControlLabel, FormControl , FormGroup} from 'react-bootstrap';
 
-/*
-  Functionality to create different Criteria sets
-  TODO: Finish this component and add into application
-*/
 class CriteriaEditor extends React.Component {
     constructor(props) {
         super(props);
@@ -37,7 +32,7 @@ class CriteriaEditor extends React.Component {
       };
       return (
         <div>
-            <div className='back-btn-container'>
+            <div class='back-btn-container'>
                 <button onClick={this.props.backButton}>Back</button>
             </div>
             <div className='page-title'>

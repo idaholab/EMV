@@ -4,9 +4,6 @@ Copyright 2020 Southern California Edison Company
 ALL RIGHTS RESERVED
 */
 
-/*
-  Function to update the JsonRep object inside the dabase
-*/
 export async function updateJsonRep(db, cisID) {
     const curCIS = await db.select().from(cisID.toString()).one();
 
@@ -53,5 +50,6 @@ export async function updateJsonRep(db, cisID) {
     .set({
         jsonRep: JSON.stringify(jsToJSON);
     }).one();
+    // console.log('Updated CIS JSON');
 
 }
