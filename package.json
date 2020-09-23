@@ -57,6 +57,24 @@
       }
     }
   },
+  "resolutions": {
+	  "lodash": "^4.17.19",
+	  "semver": "^4.3.2",
+	  "minimatch": "^3.0.2",
+	  "braces": "^2.3.1",
+	  "minimist": "^1.2.3",
+	  "mime": "^1.4.1",
+	  "hoek": "^4.2.1",
+	  "uglify-js": "^2.6.0",
+	  "cryptiles": "^4.1.2",
+	  "clean-css": "^4.1.11",
+	  "constantinople": "^3.1.1",
+	  "electron": "^7.2.4",
+	  "bl": "^1.2.3",
+	  "mem": "^4.0.0",
+	  "yargs-parser": "^13.1.2",
+	  "js-yaml": "^3.13.1"
+  },
   "dependencies": {
     "@types/electron-devtools-installer": "^2.0.3",
     "@types/react": "^16.4.10",
@@ -65,7 +83,8 @@
     "bootstrap": "^3.4.1",
     "chart.js": "^2.7.2",
     "crypto-js": "^3.1.9-1",
-    "electron-compile": "^6.4.3",
+    "electron": "^7.2.4",
+    "electron-compile": "^6.4.4",
     "electron-devtools-installer": "^2.2.4",
     "electron-json-storage": "^4.1.0",
     "electron-squirrel-startup": "^1.0.0",
