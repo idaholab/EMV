@@ -1,6 +1,6 @@
 # Cyber Issue Scoring for Exploit, Malware, and Vulnerability (EMV)
 
-<!-- Last Updated 11/29/2018 -->
+<!-- Last Updated 11/29/2018 TODO: massive overhaul of README -->
 
 
 There are a large number of potential exploits, malware, and vulnerabilities (EMV) that can be used to attack control systems on critical infrastructure.  Exploits and malware represent the offense aspects and vulnerabilities represent the maintenance aspects of the challenge. Successfully protecting a control system against these attacks requires a structured process for identifying, evaluating, prioritizing, and addressing
