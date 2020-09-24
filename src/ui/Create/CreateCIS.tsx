@@ -35,7 +35,7 @@ class CreateCIS extends React.Component {
     }
     
     private validateForm() {
-        return this.state.cisName.length > 0 && this.state.cisDescription.length > 0 && this.state.cisConfiguration >0;
+        return this.state.cisName.length > 0 && this.state.cisDescription.length > 0 && this.state.cisConfiguration.length >0;
     }
 
     private componentDidMount() {
