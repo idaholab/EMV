@@ -111,7 +111,7 @@ export default class MainPane extends React.Component {
               <div id='header-title'>
                   <span>Cyber Issue Scoring Application</span>
               </div>
-              <UserPortal uname={this.props.uname} urole={this.props.urole} uportal={this.props.uportal}/>
+              <div id ='user-portal'><UserPortal uname={this.props.uname} urole={this.props.urole} uportal={this.props.uportal}/></div>
               <div id='header-btn-container'>
                   <span id='btn-logout' onClick={this.props.logout}> Log-Out </span>
               </div>

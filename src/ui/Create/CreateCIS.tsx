@@ -6,7 +6,7 @@ ALL RIGHTS RESERVED
 
 /*Libraries*/
 import * as React from 'react';
-import { FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
+import { Button, FormGroup, FormControl, ControlLabel, Form } from 'react-bootstrap';
 /*Custom*/
 import * as emvPresets from '../../db/emvPresets.json';
 
@@ -17,6 +17,7 @@ import * as emvPresets from '../../db/emvPresets.json';
   TODO: Sanitize inputs
   TODO: Allow customizing and selecting different Critera Sets
   TODO: Check to see if CIS is already created  under that name and Configuration
+  TODO: Test updating react-bootstrap
 */
 class CreateCIS extends React.Component {
     constructor(props) {
@@ -31,6 +32,10 @@ class CreateCIS extends React.Component {
             cisTicketMemo: '',
             configurations: []
         };
+    }
+    
+    private validateForm() {
+        return this.state.cisName.length > 0 && this.state.cisDescription.length > 0 && this.state.cisConfiguration >0;
     }
 
     private componentDidMount() {
@@ -56,7 +61,7 @@ class CreateCIS extends React.Component {
             'UPDATE ' + this.props.uid
             + ' ADD cis_list_in_progress = ' + cisID.toString(),
         );
-        // console.log('Updated List in Progress');
+        console.log('Updated List in Progress');
     };
 
     public createDefault = async function(db, componentThis) {
@@ -78,85 +83,95 @@ class CreateCIS extends React.Component {
         let cis = null;
 
         //Create root vertex
-        cis = await db.create('VERTEX', 'CIS')
-        .set({
-            name: this.state.cisName,
-            description: this.state.cisDescription,
-            configuration: this.state.cisConfiguration,
-            //criteriaSet: this.state.criteriaSet,
-            criteriaSet: 'default',
-            ticket: this.state.cisTicket,
-            ticketMemo: this.state.cisTicketMemo,
-            owner: this.props.uid,
-            status: 'progress'
-        }).one();
-
-        cisID = cis['@rid'];
-        belongsTo = await db.create('EDGE', 'belongs_to')
-        .from(cisID).to(this.state.cisConfiguration).one();
-
-        //Create categories
-        for (const catObj of emvPresets.default) {
-            category = await db.create('VERTEX', 'Category')
-            .set({
-                name: catObj.category,
-                total_score: 0
-            }).one();
-
-            categoryID = category['@rid'];
-            categoryOf = await db.create('EDGE', 'category_of')
-            .from(categoryID).to(cisID).one();
-
-            //Create characteristics
-            for (const charObj of catObj.characteristics) {
-                characteristic = await db.create('VERTEX', 'Characteristic')
+        //TODO: Hacky if/else to not submit bad data to db.. sanitize better on html side also
+        try{
+            if(!this.state.cisName || !this.state.cisDescription || !this.state.cisConfiguration){
+                console.log('bad data');
+            }else{
+                cis = await db.create('VERTEX', 'CIS')
                 .set({
-                    name: charObj.characteristic,
-                    total_score: 0,
-                    weight: charObj.weight
+                    name: this.state.cisName,
+                    description: this.state.cisDescription,
+                    configuration: this.state.cisConfiguration,
+                    //criteriaSet: this.state.criteriaSet,
+                    criteriaSet: 'default',
+                    ticket: this.state.cisTicket,
+                    ticketMemo: this.state.cisTicketMemo,
+                    owner: this.props.uid,
+                    status: 'progress'
                 }).one();
-
-                characteristicID = characteristic['@rid'];
-                characteristicOf = await db.create('EDGE', 'characteristic_of')
-                .from(characteristicID).to('#' + categoryOf.out.cluster + ':' + categoryOf.out.position).one();
-
-                //Create attributes
-                for (const attObj of charObj.attributes) {
-                    attribute = await db.create('VERTEX', 'Attribute')
+    
+                cisID = cis['@rid'];
+                belongsTo = await db.create('EDGE', 'belongs_to')
+                .from(cisID).to(this.state.cisConfiguration).one();
+    
+                //Create categories
+                for (const catObj of emvPresets.default) {
+                    category = await db.create('VERTEX', 'Category')
                     .set({
-                        name: attObj.attribute,
-                        score: 0,
-                        user_weight: 1,
-                        weighted_score: 0
+                        name: catObj.category,
+                        total_score: 0
                     }).one();
-
-                    attributeID = attribute['@rid'];
-                    attributeOf = await db.create('EDGE', 'attribute_of')
-                    .from(attributeID).to('#' + characteristicOf.out.cluster + ':' + characteristicOf.out.position).one();
-
-                    //Create Score Guidances
-                    for (const scoreObj of attObj.scores) {
-                        score = await db.create('VERTEX', 'Score')
+    
+                    categoryID = category['@rid'];
+                    categoryOf = await db.create('EDGE', 'category_of')
+                    .from(categoryID).to(cisID).one();
+    
+                    //Create characteristics
+                    for (const charObj of catObj.characteristics) {
+                        characteristic = await db.create('VERTEX', 'Characteristic')
                         .set({
-                            description: scoreObj.description,
-                            score: scoreObj.score,
-                            chosen: false
+                            name: charObj.characteristic,
+                            total_score: 0,
+                            weight: charObj.weight
                         }).one();
-
-                        scoreID = score['@rid'];
-                        scoreOf = await db.create('EDGE', 'score_guidance_of')
-                        .from(scoreID).to('#' + attributeOf.out.cluster + ':' + attributeOf.out.position).one().then();
+    
+                        characteristicID = characteristic['@rid'];
+                        characteristicOf = await db.create('EDGE', 'characteristic_of')
+                        .from(characteristicID).to('#' + categoryOf.out.cluster + ':' + categoryOf.out.position).one();
+    
+                        //Create attributes
+                        for (const attObj of charObj.attributes) {
+                            attribute = await db.create('VERTEX', 'Attribute')
+                            .set({
+                                name: attObj.attribute,
+                                score: 0,
+                                user_weight: 1,
+                                weighted_score: 0
+                            }).one();
+    
+                            attributeID = attribute['@rid'];
+                            attributeOf = await db.create('EDGE', 'attribute_of')
+                            .from(attributeID).to('#' + characteristicOf.out.cluster + ':' + characteristicOf.out.position).one();
+    
+                            //Create Score Guidances
+                            for (const scoreObj of attObj.scores) {
+                                score = await db.create('VERTEX', 'Score')
+                                .set({
+                                    description: scoreObj.description,
+                                    score: scoreObj.score,
+                                    chosen: false
+                                }).one();
+    
+                                scoreID = score['@rid'];
+                                scoreOf = await db.create('EDGE', 'score_guidance_of')
+                                .from(scoreID).to('#' + attributeOf.out.cluster + ':' + attributeOf.out.position).one().then();
+                            }
+                        }
                     }
                 }
+    
+                await this.updateUserWorkFlow(db, cisID);
+                await this.updateJsonRep(db, cisID);
+                await this.updateCurrentCIS(db, cisID, componentThis);
+    
+                //Go to Scoring View
+                componentThis.props.changeTab(componentThis.props.scoreTabKey);
             }
+            
+        }catch{
+            console.log('something wrong with input');
         }
-
-        await this.updateUserWorkFlow(db, cisID);
-        await this.updateJsonRep(db, cisID);
-        await this.updateCurrentCIS(db, cisID, componentThis);
-
-        //Go to Scoring View
-        componentThis.props.changeTab(componentThis.props.scoreTabKey);
     };
 
     public updateJsonRep = async function(db, cisID) {
@@ -244,11 +259,12 @@ class CreateCIS extends React.Component {
 
         return (
             <div>
-                <form id='create-cis-container'>
+                <form id='create-cis-container'
+                    onSubmit={this.props.handleSubmit}>
                     <div id='cis-config-wrapper'>
                         <FormGroup controlId='cisConfiguration'>
                             <ControlLabel>Configuration</ControlLabel>
-                            <FormControl componentClass='select' onChange={this.handleChange}>
+                            <FormControl componentClass='select' onChange={this.handleChange} required>
                                 <option value='' disabled selected hidden>Select Configuration</option>
                                 {configList}
                             </FormControl>
@@ -261,6 +277,7 @@ class CreateCIS extends React.Component {
                             type='text'
                             value={this.state.cisName}
                             onChange={this.handleChange}
+                            required
                             />
                         </FormGroup>
                     </div>
@@ -291,12 +308,21 @@ class CreateCIS extends React.Component {
                             type='text'
                             value={this.state.cisDescription}
                             onChange={this.handleChange}
+                            required
                             />
                         </FormGroup>
                     </div>
                     <div id='cis-button-wrapper'>
-                        <button onClick={this.createCIS}>Begin Scoring</button>
+                        <Button
+                        block={true}
+                        bsSize='large'
+                        disabled={!this.validateForm()}
+                        type='submit'
+                        >
+                        Begin Scoring
+                        </Button>
                     </div>
+                    
                 </form>
             </div>
         );

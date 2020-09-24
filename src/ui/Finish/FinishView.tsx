@@ -62,7 +62,7 @@ class FinishView extends React.Component {
         ...base,
         'color': 'black',
         'height': '34px',
-        'min-height': '24px',
+        'min-height': '24px'
       })
     };
 
@@ -153,15 +153,17 @@ class FinishView extends React.Component {
                                 </Tab.Pane>
                                 <Tab.Pane eventKey={1}>
                                     <div id='comparison-view'>
-                                      <Select
-                                        isMulti
-                                        styles={this.customStyles}
-                                        onChange={this.handleChange}
-                                        name='comparison'
-                                        options={this.props.compareList}
-                                        className='our_comparison'
-                                        classNamePrefix='select'
-                                      />
+                                        <div id='select-wrapper'>
+                                            <Select
+                                                isMulti
+                                                styles={this.customStyles}
+                                                onChange={this.handleChange}
+                                                name='comparison'
+                                                options={this.props.compareList}
+                                                className='our_comparison'
+                                                classNamePrefix='select'
+                                            />
+                                      </div>
                                         {/* <h3>Comparison View</h3> */}
                                         <div id='chart-container'>
                                           <h4>Category Scores</h4>

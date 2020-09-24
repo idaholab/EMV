@@ -28,12 +28,12 @@
 html, body {
     background-color: #383c4a;
     box-sizing: border-box;
-    font-family: Inconsolata;
-    /* font-family: Arial, Helvetica, sans-serif; */
+    /* font-family: Inconsolata; */
+    font-family: Arial, Helvetica, sans-serif;
     height: 100%;
     width: 100%;
     margin: 0;
-    padding: 5px;
+    /* padding: 5px; */
 }
 
 button {
@@ -42,7 +42,6 @@ button {
     border-radius: 5px;
     color: inherit;
     padding: 5px;
-    margin: 5px;
     font-size: 1.25em;
 }
 
@@ -58,6 +57,16 @@ button {
          url("../fonts/Inconsolata-Bold.ttf") format("ttf");
 }
 
+#header-title { 
+    text-align: center;
+    font-size: 1.5em;
+    grid-area: 1 / 1 / 2 / 4;
+}
+#user-portal { grid-area: 1 / 2 / 2 / 3; }
+#header-btn-container { grid-area: 1 / 3 / 2 / 4; }
+
+    
+
 .App-header {
     /* background-color: rgb(216, 211, 201); */
     background-color: #404552;
@@ -65,8 +74,12 @@ button {
     width: 100%;
     height: 50px;
     display: grid;
+    /* grid-template-columns: repeat(12, 1fr); */
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
     grid-template-columns: 9fr 2fr 1fr;
-    line-height: 50px;
+    line-height: 50px;    
 }
 
 .App-logo {
@@ -303,15 +316,15 @@ button {
 
 #create-cis-container {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: auto auto auto auto auto;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto auto auto auto;
     grid-gap: 25px;
     grid-template-areas:
-        "cisConf cisCrit . . ."
-        "cisName cisTicket . . ."
-        "cisTicketMemo cisTicketMemo . . ."
-        "cisDesc cisDesc . . ."
-        ". . cisButton . .";
+        ". cisConf cisCrit ."
+        ". cisName cisTicket ."
+        ". cisTicketMemo cisTicketMemo ."
+        ". cisDesc cisDesc ."
+        ". . cisButton .";
 }
 
 #cis-config-wrapper {
@@ -342,11 +355,11 @@ button {
     grid-area: cisButton;
 }
 
-#header-title {
-    text-align: left;
+/* #header-title {
+    text-align: center;
     font-size: 1.5em;
     margin-left: 10px;
-}
+} */
 
 #btn-logout {
     background-color: #5294e2;
@@ -358,6 +371,7 @@ button {
 #btn-userportal {
     cursor: pointer;
     text-align: left;
+    position: relative;
 }
 
 #btn-userportal:hover .dropdown-content {
@@ -494,6 +508,12 @@ div.FormSubmit {
 div.CisList{
   padding: 10%;
 }
+
+#select-wrapper {
+    display: inline-block;
+    text-align: center;
+    width: 300px;
+  }
 
 /* .reasoningField {
   padding: 20%;

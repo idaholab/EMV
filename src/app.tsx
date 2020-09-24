@@ -22,6 +22,7 @@ import { ipcRenderer, remote } from 'electron';
 import { Modal, ModalHeader, ModalBody, ModalFooter, ModalTitle, FormGroup, FormControl } from 'react-bootstrap';
 import { writeFile } from 'fs';
 
+//TODO: FIX Nav state to allow navbar to be consistent across application.  Some lifting due to SplitPane setup..
 export class App extends React.Component {
 
     constructor() {
@@ -34,6 +35,7 @@ export class App extends React.Component {
             criteriaEditorPage: false,
             configurationEditorPage: false,
             manageUsersPage: false,
+            nav: false,
             username: '',
             password: '',
             userObject: null,
@@ -396,6 +398,7 @@ export class App extends React.Component {
                 {/* <Header /> */}
                 { this.state.loadingPage && <LoadingPage msg='Preparing Database'/>}
                 { this.state.loginPage && <LoginPortal uname={this.state.username} passwd={this.state.password} errorMsg={this.state.errorMsg} handleChange={this.handleChange} handleSubmit={this.handleSubmit}/> }
+                {/* { this.state.nav && <Nav uname={this.state.username} urole={this.state.userObject.role} uid={this.state.userObject['@rid'].toString()}db={this.state.database} logout={this.handleLogout} uportal={this.handleSelectFromUserPortal}/> }} */}
                 { this.state.mainPage && <Main uname={this.state.username} urole={this.state.userObject.role} uid={this.state.userObject['@rid'].toString()}db={this.state.database} logout={this.handleLogout} uportal={this.handleSelectFromUserPortal}/> }
                 { this.state.userSettingsPage && <UserSettings uname={this.state.username} db={this.state.database} logout={this.handleLogout} backButton={this.handleBack}/> }
                 { this.state.manageUsersPage && <ManageUsers db={this.state.database} logout={this.handleLogout} backButton={this.handleBack}/> }
