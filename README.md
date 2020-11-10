@@ -1,10 +1,18 @@
 # Cyber Issue Scoring for Exploit, Malware, and Vulnerability (EMV)
 
-<!-- Last Updated 11/29/2018 -->
+<!-- Last Updated 11/10/2020 -->
+Version 0.0.1 
+
+EMV was presented at BSides Idaho (https://www.bsidesidaho.org/) on October 23, 2020. A video recording of the presentation is found below.
+
+[![STIG Video](/images/bsides.png)](https://www.youtube.com/watch?v=_qEseoPgdec)
 
 
-There are a large number of potential exploits, malware, and vulnerabilities (EMV) that can be used to attack control systems on critical infrastructure.  Exploits and malware represent the offense aspects and vulnerabilities represent the maintenance aspects of the challenge. Successfully protecting a control system against these attacks requires a structured process for identifying, evaluating, prioritizing, and addressing
-EMVs. EMV Scoring is needed since other scoring methodologies do not include: Exploits and Malware; applicability to a specific configuration; defense capabilities; consequence; or other adversary factors. A benefit of processing through the EMV Scoring process is the identification of potential threat object characteristics that can be used for automated response.
+<img align="right" width="260" src="/images/EMV_rev1.png"> Exploit, Malware and Vulnerability (EMV) is a tool used for scoring cyber issue against various hardware configurations and compare that score against other scored issues for prioritization and trending over time.
+
+See the [EMV Innovation Sheet](EMV_INL_Innovation_Sheet2019.pdf) for an overview.
+
+There are a large number of potential exploits, malware, and vulnerabilities (EMV) that can be used to attack control systems on critical infrastructure.  Exploits and malware represent the offense aspects and vulnerabilities represent the maintenance aspects of the challenge. Successfully protecting a control system against these attacks requires a structured process for identifying, evaluating, prioritizing, and addressing EMVs. EMV Scoring is needed since other scoring methodologies do not include: Exploits and Malware; applicability to a specific configuration; defense capabilities; consequence; or other adversary factors. A benefit of processing through the EMV Scoring process is the identification of potential threat object characteristics that can be used for automated response.
 
 Idaho National Laboratory (INL) participated as a team member with Southern California Edison on the California Energy Systems for the 21st Century (CES-21) Program and has refined these concepts with the asset owner's point of view to prioritize EMV based on their operational knowledge of the system under protection, sometimes with a limited knowledge of the adversary, but a full understanding of the utilities' ability to defend against potential consequences including the consideration of the asset owner's risk tolerances. This EMV prioritization enables a scored ranking of issues to be addressed. CES-21 uses EMV to determine the creation of indicator and remediation language in automated response technologies, providing for agile response capabilities within substation automation environments.
 
