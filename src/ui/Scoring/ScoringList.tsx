@@ -38,15 +38,15 @@ class ScoringList extends React.Component {
           if (queryR) {
 	           console.log('our query', queryR);
 	           if(queryR.cis_list_in_progress){
-             for (const cisid of queryR.cis_list_in_progress) {
-               const query = self.props.db.select().from(cisid.toString()).one()
-                	.then(
-                  	function(query) {
-                    		self.setState((prevState) => ({
-                      			progressList: [...prevState.progressList, query]
-                    		}));
-                  	}
-                	);
+              for (const cisid of queryR.cis_list_in_progress) {
+                const query = self.props.db.select().from(cisid.toString()).one()
+                    .then(
+                      function(query) {
+                          self.setState((prevState) => ({
+                              progressList: [...prevState.progressList, query]
+                          }));
+                      }
+                    );
             	}
 	           } else {
 	    	         console.log('Error. progressList found');

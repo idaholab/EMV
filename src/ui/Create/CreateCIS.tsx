@@ -160,7 +160,6 @@ class CreateCIS extends React.Component {
                         }
                     }
                 }
-    
                 await this.updateUserWorkFlow(db, cisID);
                 await this.updateJsonRep(db, cisID);
                 await this.updateCurrentCIS(db, cisID, componentThis);
@@ -317,6 +316,7 @@ class CreateCIS extends React.Component {
                         block={true}
                         bsSize='large'
                         disabled={!this.validateForm()}
+                        onClick={this.createCIS}
                         type='submit'
                         >
                         Begin Scoring
