@@ -1964,12 +1964,13 @@ color-name@^1.0.0:
   resolved "https://registry.yarnpkg.com/color-name/-/color-name-1.1.4.tgz#c2a09a87acbde69543de6f63fa3995c826c536a2"
   integrity sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==
 
-color-string@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/color-string/-/color-string-0.3.0.tgz#27d46fb67025c5c2fa25993bfbf579e47841b991"
-  integrity sha1-J9RvtnAlxcL6JZk7+/V55HhBuZE=
+color-string@^0.3.0, color-string@^1.5.5:
+  version "1.5.5"
+  resolved "https://registry.yarnpkg.com/color-string/-/color-string-1.5.5.tgz#65474a8f0e7439625f3d27a6a19d89fc45223014"
+  integrity sha512-jgIoum0OfQfq9Whcfc2z/VhCNcmQjWbey6qBX0vqt7YICflUmBCh9E9CiQD5GSJ+Uehixm3NUwHVhqUAWRivZg==
   dependencies:
     color-name "^1.0.0"
+    simple-swizzle "^0.2.2"
 
 color@^0.11.0:
   version "0.11.4"
@@ -3109,16 +3110,7 @@ electron-wix-msi@^2.1.1:
     lodash "^4.17.15"
     uuid "^3.3.3"
 
-electron@3.0.10, electron@^7.2.4:
-  version "7.3.3"
-  resolved "https://registry.yarnpkg.com/electron/-/electron-7.3.3.tgz#f61502a3d42d85adfecd8e37f98da449b591f8af"
-  integrity sha512-PrJEsuRiaAhTDHtbH3EM+RIne+nZ6ifGChUadmtmPqHUQ+rIhf4jSi2ZN768IgBDw4SidMJiCrvQRiuDha9+Ew==
-  dependencies:
-    "@electron/get" "^1.0.1"
-    "@types/node" "^12.0.12"
-    extract-zip "^1.0.3"
-
-electron@^9.4.0:
+electron@3.0.10, electron@^9.4.0:
   version "9.4.0"
   resolved "https://registry.yarnpkg.com/electron/-/electron-9.4.0.tgz#c3c607e3598226ddbaaff8babcdffa8bb2210936"
   integrity sha512-hOC4q0jkb+UDYZRy8vrZ1IANnq+jznZnbkD62OEo06nU+hIbp2IrwDRBNuSLmQ3cwZMVir0WSIA1qEVK0PkzGA==
@@ -4456,6 +4448,11 @@ is-arrayish@^0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/is-arrayish/-/is-arrayish-0.2.1.tgz#77c99840527aa8ecb1a8ba697b80645a7a926a9d"
   integrity sha1-d8mYQFJ6qOyxqLppe4BkWnqSap0=
+
+is-arrayish@^0.3.1:
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/is-arrayish/-/is-arrayish-0.3.2.tgz#4574a2ae56f7ab206896fb431eaeed066fdf8f03"
+  integrity sha512-eVRqCvVlZbuw3GrM63ovNSNAeA1K16kaR/LRY/92w0zxQ5/1YzwblUX652i4Xs9RwAGjW9d9y6X88t8OaAJfWQ==
 
 is-binary-path@^1.0.0:
   version "1.0.1"
@@ -7285,6 +7282,13 @@ signed-varint@2.0.1:
   integrity sha1-UKmYnafJjCxh2tEZvJdHDvhSgSk=
   dependencies:
     varint "~5.0.0"
+
+simple-swizzle@^0.2.2:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/simple-swizzle/-/simple-swizzle-0.2.2.tgz#a4da6b635ffcccca33f70d17cb92592de95e557a"
+  integrity sha1-pNprY1/8zMoz9w0Xy5JZLeleVXo=
+  dependencies:
+    is-arrayish "^0.3.1"
 
 single-line-log@^1.1.2:
   version "1.1.2"
