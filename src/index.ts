@@ -27,7 +27,7 @@ config_menu.setup();
 const createWindow = async () => {
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    icon: path.join(__dirname, './static/favicon.ico'),
+    //icon: path.join(__dirname, '/static/favicon.ico'),
     width: 1800,
     height: 1500,
     minHeight: 600,
