@@ -99,7 +99,7 @@
     "electron-devtools-installer": "^2.2.4",
     "electron-json-storage": "^4.1.0",
     "electron-squirrel-startup": "^1.0.0",
-    "moment": "^2.21.0",
+    "moment": "^2.29.4",
     "orientjs": "^3.0.1",
     "react": "^16.4.2",
     "react-bootstrap": "^0.32.1",
